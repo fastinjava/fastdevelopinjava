@@ -1,14 +1,15 @@
-package com.fastdevelopinjava.service.user.convert;
+package com.fastdevelopinjava.service.user.convert.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.api.system.manage.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.system.manage.dto.UserReqDTO;
+import com.fastdevelopinjava.service.user.convert.UserConvert;
 import com.fastdevelopinjava.service.user.entity.UserDO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConvertImpl  implements UserConvert{
+public class UserConvertImpl  implements UserConvert {
     @Override
     public UserDO userReqDTO2UserDO(UserReqDTO userReqDTO) {
         if (null == userReqDTO) return null;
