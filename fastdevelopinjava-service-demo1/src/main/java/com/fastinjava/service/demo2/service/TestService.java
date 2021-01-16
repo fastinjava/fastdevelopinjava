@@ -17,7 +17,7 @@ public class TestService {
     public Object test(){
         UserReqDTO userReqDTO = new UserReqDTO();
         userReqDTO.setUserId(1);
-        ResResultDTO<UserDTO> resResultDTO = userclient.getOne(userReqDTO);
+        ResResultDTO<UserDTO> resResultDTO = userclient.selectOneByAll(userReqDTO);
         return resResultDTO;
     }
 
