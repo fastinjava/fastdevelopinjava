@@ -11,6 +11,7 @@ import com.fastdevelopinjava.framework.common.res.ResResultDTO;
 import com.fastdevelopinjava.service.user.convert.UserConvert;
 import com.fastdevelopinjava.service.user.mapper.UserMapper;
 import com.fastdevelopinjava.service.user.service.UserService;
+import jdk.management.resource.ResourceRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
 
@@ -30,8 +31,16 @@ public class UserClientImpl implements UserClient {
     @Override
     public ResResultDTO<PageResultDTO<UserDTO>> selectList(UserReqDTO userReqDTO) {
         ResResultDTO<PageResultDTO<UserDTO>> resResultDTO = new ResResultDTO<>();
-        PageResultDTO<UserDTO> pageResultDTO = userService.selectList(userReqDTO);
-        return null;
+        try {
+            PageResultDTO<UserDTO> pageResultDTO = userService.selectList(userReqDTO);
+            resResultDTO.setSuccess(true);
+            resResultDTO.setData(pageResultDTO);
+        } catch (Exception e) {
+            resResultDTO.setSuccess(false);
+            resResultDTO.setErrorMessage(e.getMessage());
+            log.error("UserClientImpl#selectList error , userReqDTO = {} ", userReqDTO);
+        }
+        return resResultDTO;
     }
 
     @Override
