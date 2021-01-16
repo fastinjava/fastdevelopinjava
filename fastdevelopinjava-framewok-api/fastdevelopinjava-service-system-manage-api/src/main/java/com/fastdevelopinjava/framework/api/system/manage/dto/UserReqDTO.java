@@ -1,13 +1,18 @@
 package com.fastdevelopinjava.framework.api.system.manage.dto;
 
+import com.fastdevelopinjava.framework.common.req.BaseReqDTO;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
 
 
 @Data
-public class UserReqDTO implements Serializable {
+@NoArgsConstructor
+@Builder
+public class UserReqDTO extends BaseReqDTO implements Serializable {
 
 
     private static final long serialVersionUID = 1L;

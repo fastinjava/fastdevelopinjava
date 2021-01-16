@@ -7,8 +7,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -18,6 +20,8 @@ import lombok.EqualsAndHashCode;
  * @author lify
  * @since 2021-01-16
  */
+@Builder
+@NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("u_user")

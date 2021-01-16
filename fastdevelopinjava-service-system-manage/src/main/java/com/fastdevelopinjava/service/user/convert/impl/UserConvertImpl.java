@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.api.system.manage.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.api.system.manage.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.system.manage.dto.UserReqDTO;
+import com.fastdevelopinjava.framework.api.system.manage.dto.UserUpdateDTO;
 import com.fastdevelopinjava.service.user.convert.UserConvert;
 import com.fastdevelopinjava.service.user.entity.UserDO;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,14 @@ public class UserConvertImpl  implements UserConvert {
         if (ObjectUtil.isEmpty(userCreateDTO)) return null;
         UserDO userDO = new UserDO();
         copyProperties(userCreateDTO,userDO);
+        return userDO;
+    }
+
+    @Override
+    public UserDO userUpdateDTO2UserDO(UserUpdateDTO userUpdateDTO) {
+        if (ObjectUtil.isEmpty(userUpdateDTO)) return null;
+        UserDO userDO = new UserDO();
+        copyProperties(userUpdateDTO,userDO);
         return userDO;
     }
 
