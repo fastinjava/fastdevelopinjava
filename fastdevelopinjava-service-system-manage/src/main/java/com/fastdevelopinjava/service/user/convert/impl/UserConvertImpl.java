@@ -30,16 +30,17 @@ public class UserConvertImpl  implements UserConvert {
     public UserDTO user2UserDTO(UserDO userDO) {
         if (ObjectUtil.isEmpty(userDO)) return null;
         UserDTO userDTO = new UserDTO();
-
-        if (null != userDO.getUserId()) userDTO.setUserId(userDO.getUserId());
-        if (StringUtils.isNotEmpty(userDO.getUserName()))     userDTO.setUserName(userDO.getUserName());
-        if (StringUtils.isNotEmpty(userDO.getUserNickName())) userDTO.setUserNickName(userDO.getUserNickName());
-        if (StringUtils.isNotEmpty(userDO.getUserEmail()))    userDTO.setUserEmail(userDO.getUserEmail());
-        if (ObjectUtil.isNotEmpty(userDO.getDeleteFlag()))    userDTO.setDeleteFlag(userDO.getDeleteFlag());
-        if (ObjectUtil.isNotEmpty(userDO.getUpdatedTime()))   userDTO.setUpdatedTime(userDO.getUpdatedTime());
-        if (ObjectUtil.isNotEmpty(userDO.getCreatedTime()))   userDTO.setCreatedTime(userDO.getCreatedTime());
-        if (ObjectUtil.isNotEmpty(userDO.getCreatedUserId())) userDTO.setCreatedUserId(userDO.getCreatedUserId());
-        if (ObjectUtil.isNotEmpty(userDO.getUpdatedUserId())) userDTO.setUpdatedUserId(userDO.getUpdatedUserId());
+//
+//        if (null != userDO.getUserId()) userDTO.setUserId(userDO.getUserId());
+//        if (StringUtils.isNotEmpty(userDO.getUserName()))     userDTO.setUserName(userDO.getUserName());
+//        if (StringUtils.isNotEmpty(userDO.getUserNickName())) userDTO.setUserNickName(userDO.getUserNickName());
+//        if (StringUtils.isNotEmpty(userDO.getUserEmail()))    userDTO.setUserEmail(userDO.getUserEmail());
+//        if (ObjectUtil.isNotEmpty(userDO.getDeleteFlag()))    userDTO.setDeleteFlag(userDO.getDeleteFlag());
+//        if (ObjectUtil.isNotEmpty(userDO.getUpdatedTime()))   userDTO.setUpdatedTime(userDO.getUpdatedTime());
+//        if (ObjectUtil.isNotEmpty(userDO.getCreatedTime()))   userDTO.setCreatedTime(userDO.getCreatedTime());
+//        if (ObjectUtil.isNotEmpty(userDO.getCreatedUserId())) userDTO.setCreatedUserId(userDO.getCreatedUserId());
+//        if (ObjectUtil.isNotEmpty(userDO.getUpdatedUserId())) userDTO.setUpdatedUserId(userDO.getUpdatedUserId());
+        convert(userDO,userDTO);
         return userDTO;
 
     }
