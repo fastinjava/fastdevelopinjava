@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: fastdevelopinjava-service-gateway
+  main:
+    allow-bean-definition-overriding: true # SpringBoot 2.1需要设置
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+        namespace: fastdevelopinjava-biz
+        cluster-name: DEFAULT
+      config:
+        server-addr: 127.0.0.1:8848 # 配置中心地址
+        file-extension: yaml
+        namespace: fastdevelopinjava-biz
+        group: DEFAULT_GROUP
+    gateway:
+      discovery:
+        locator:
+          enabled: true  #开启注册中心路由功能
+      routes:
+        - id: demo1 # 路由列表元素唯一标志
+          uri: lb://fastdevelopinjava-service-demo1 # lb://服务名称
+          predicates:
+            - Path=/gateway/demo1/** # 访问网关时的匹配规则
+          filters:
+            - StripPrefix=1 # 命中匹配规则后，是否去掉前缀，比如说这里http://localhost:50003/gateway/demo1/test1，实际上转发到 http://localhost:50001/demo1/test1
+        - id: demo2
+          uri: lb://fastdevelopinjava-service-demo2
+          predicates:
+            - Path=/gateway/demo2/**
+          filters:
+            - StripPrefix=1
