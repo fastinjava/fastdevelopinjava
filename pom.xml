@@ -21,8 +21,8 @@
         <module>fastdevelopinjava-service-demo1</module>
         <module>fastdevelopinjava-service-demo2</module>
         <module>fastdevelopinjava-service-gateway</module>
-        <module>fastdevelopinjava-service-system-manage</module>
         <module>fastdevelopinjava-framewok-api</module>
+        <module>fastdevelopinjava-service-ucenter</module>
     </modules>
 
 
