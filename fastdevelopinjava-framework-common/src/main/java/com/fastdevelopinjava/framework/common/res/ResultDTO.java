@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-public class Result<T> implements Serializable {
+public class ResultDTO<T> implements Serializable {
     private Boolean success;
     private String code;
     private String msg;
     private T data;
 
-    public Result() {
+    public ResultDTO() {
     }
 
     public Boolean getSuccess() {
