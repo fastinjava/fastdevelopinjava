@@ -19,6 +19,7 @@ public class UserClientImpl implements UserClient {
     @GetMapping("/getOne")
     @Override
     public Result<UserDTO> getOne(UserReqDTO userReqDTO) {
+        UserDTO userDTO = userService.getOne(userReqDTO);
         return null;
     }
 }
