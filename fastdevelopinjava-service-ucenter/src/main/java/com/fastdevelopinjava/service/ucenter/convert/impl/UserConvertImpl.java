@@ -1,8 +1,10 @@
 package com.fastdevelopinjava.service.ucenter.convert.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
+import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.convert.UserConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.UserDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.UserDO;
@@ -35,6 +37,46 @@ public class UserConvertImpl implements UserConvert {
             userDTO.setDeleteFlag(userDO.getDeleteFlag());
         }
         return userDTO;
+    }
+
+    @Override
+    public UserDO userCreateDTO2UserDO(UserCreateDTO userCreateDTO) {
+
+        if (null == userCreateDTO) return null;
+
+        UserDO userDO = new UserDO();
+        if (ObjectUtil.isNotEmpty(userCreateDTO.getUserId())) {
+            userDO.setUserId(userCreateDTO.getUserId());
+        }
+        if (StringUtils.isNotEmpty(userCreateDTO.getUserName())) {
+            userDO.setUserName(userCreateDTO.getUserName());
+        }
+        if (StringUtils.isNotEmpty(userCreateDTO.getUserNickName())) {
+            userDO.setUserNickName(userCreateDTO.getUserNickName());
+        }
+        if (ObjectUtil.isNotEmpty(userCreateDTO.getDeleteFlag())) {
+            userDO.setDeleteFlag(userCreateDTO.getDeleteFlag());
+        }
+        return userDO;
+    }
+
+    @Override
+    public UserDO userUpdateDTO2UserDO(UserUpdateDTO userUpdateDTO) {
+        if (null == userUpdateDTO) return null;
+        UserDO userDO = new UserDO();
+        if (ObjectUtil.isNotEmpty(userUpdateDTO.getUserId())) {
+            userDO.setUserId(userUpdateDTO.getUserId());
+        }
+        if (StringUtils.isNotEmpty(userUpdateDTO.getUserName())) {
+            userDO.setUserName(userUpdateDTO.getUserName());
+        }
+        if (StringUtils.isNotEmpty(userUpdateDTO.getUserNickName())) {
+            userDO.setUserNickName(userUpdateDTO.getUserNickName());
+        }
+        if (ObjectUtil.isNotEmpty(userUpdateDTO.getDeleteFlag())) {
+            userDO.setDeleteFlag(userUpdateDTO.getDeleteFlag());
+        }
+        return userDO;
     }
 
     @Override

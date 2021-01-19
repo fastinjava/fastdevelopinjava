@@ -6,12 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class UserReqDTO implements Serializable {
-
-    private Integer pageNum;
-    private Integer pageSize;
-    private Boolean pageable;
-
+public class UserCreateDTO implements Serializable {
     /**
      * 用户主键
      */
