@@ -36,6 +36,9 @@ public class UserConvertImpl implements UserConvert {
         if (ObjectUtil.isNotEmpty(userDO.getDeleteFlag())) {
             userDTO.setDeleteFlag(userDO.getDeleteFlag());
         }
+        if (StringUtils.isNotEmpty(userDO.getUserEmail())) {
+            userDTO.setUserEmail(userDO.getUserEmail());
+        }
         return userDTO;
     }
 
@@ -45,18 +48,27 @@ public class UserConvertImpl implements UserConvert {
         if (null == userCreateDTO) return null;
 
         UserDO userDO = new UserDO();
+
         if (ObjectUtil.isNotEmpty(userCreateDTO.getUserId())) {
             userDO.setUserId(userCreateDTO.getUserId());
         }
+
         if (StringUtils.isNotEmpty(userCreateDTO.getUserName())) {
             userDO.setUserName(userCreateDTO.getUserName());
         }
+
         if (StringUtils.isNotEmpty(userCreateDTO.getUserNickName())) {
             userDO.setUserNickName(userCreateDTO.getUserNickName());
         }
+
         if (ObjectUtil.isNotEmpty(userCreateDTO.getDeleteFlag())) {
             userDO.setDeleteFlag(userCreateDTO.getDeleteFlag());
         }
+
+        if (StringUtils.isNotEmpty(userCreateDTO.getUserEmail())) {
+            userDO.setUserEmail(userCreateDTO.getUserEmail());
+        }
+
         return userDO;
     }
 

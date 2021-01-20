@@ -8,9 +8,12 @@ import java.util.Date;
 @Data
 public class UserReqDTO implements Serializable {
 
-    private Integer pageNum;
-    private Integer pageSize;
-    private Boolean pageable;
+    //默认分页，第一页
+    private Integer pageNum = 0;
+    //默认分页大小 10
+    private Integer pageSize = 10;
+    //默认分页
+    private Boolean pageable = true;
 
     /**
      * 用户主键

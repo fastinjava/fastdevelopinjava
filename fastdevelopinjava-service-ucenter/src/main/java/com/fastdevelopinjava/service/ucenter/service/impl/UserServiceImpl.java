@@ -1,21 +1,23 @@
 package com.fastdevelopinjava.service.ucenter.service.impl;
 
+
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
 import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
-import com.fastdevelopinjava.framework.common.querry.QuerryTypeEnum;
 import com.fastdevelopinjava.framework.common.res.PageResultDTO;
 import com.fastdevelopinjava.service.ucenter.convert.UserConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.UserDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.UserDO;
+import com.fastdevelopinjava.service.ucenter.model.UserDOExample;
 import com.fastdevelopinjava.service.ucenter.service.UserService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,60 +30,61 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private UserConvert userConvert;
+    private UserDOMapper userMapper;
 
     @Resource
-    UserDOMapper userDOMapper;
+    UserConvert userConvert;
 
-    private QueryWrapper<UserDO> buildQueryWrapper(UserDO userDO, QuerryTypeEnum querryTypeEnum) {
-        QueryWrapper<UserDO> queryWrapper = new QueryWrapper<>();
-        if (ObjectUtil.isNotEmpty(userDO.getUserId())) queryWrapper.eq("user_id", userDO.getUserId());
-        return queryWrapper;
+    private UserDOExample buildUserDOExample(UserReqDTO userReqDTO) {
+        UserDOExample userDOExample = new UserDOExample();
+        UserDOExample.Criteria criteria = userDOExample.createCriteria();
+        if (ObjectUtil.isNotEmpty(userReqDTO.getUserId())) {
+            criteria.andUserIdEqualTo(userReqDTO.getUserId());
+        }
+        if (StringUtils.isNotEmpty(userReqDTO.getUserName())) {
+            criteria.andUserNameLike("%" + userReqDTO.getUserName().trim() + "%");
+        }
+        return userDOExample;
     }
 
     @Override
     public UserDTO getOne(UserReqDTO userReqDTO) {
-        UserDO userDO = userConvert.userReqDTO2UserDO(userReqDTO);
-        IPage<UserDO> pageInfo = userDOMapper.selectPage(new Page<>(1, 1), this.buildQueryWrapper(userDO, QuerryTypeEnum.GET_ONE));
-        if (CollectionUtil.isNotEmpty(pageInfo.getRecords())) {
-            return userConvert.userDO2UserDTO(pageInfo.getRecords().get(0));
-        }
-        return null;
+        UserDOExample userDOExample = this.buildUserDOExample(userReqDTO);
+        userDOExample.setOrderByClause("user_id limit 1");
+        UserDO userDO = userMapper.selectByExample(userDOExample).stream().findFirst().orElseGet(null);
+        return ObjectUtil.isNotEmpty(userDO) ? userConvert.userDO2UserDTO(userDO) : null;
     }
 
+    /**
+     * @param userReqDTO
+     * @return
+     */
     @Override
     public PageResultDTO<UserDTO> getList(UserReqDTO userReqDTO) {
-        UserDO userDO = userConvert.userReqDTO2UserDO(userReqDTO);
-        Page<UserDO> page;
-        if (userReqDTO.getPageable()) {
-            page = new Page<>(userReqDTO.getPageNum(),userReqDTO.getPageSize());
-        }
-        else {
-            Integer total = userDOMapper.selectCount(this.buildQueryWrapper(userDO, QuerryTypeEnum.GET_LIST));
-            page = new Page<>(1,total);
-        }
-        Page<UserDO> pageInfo = userDOMapper.selectPage(
-                page,
-                this.buildQueryWrapper(userDO, QuerryTypeEnum.GET_LIST)
-        );
-        List<UserDO> userDOList = pageInfo.getRecords();
+        PageHelper.startPage(userReqDTO.getPageNum(), userReqDTO.getPageSize(), true, true, !userReqDTO.getPageable());
+        PageInfo<UserDO> pageInfo = new PageInfo<>(userMapper.selectByExample(buildUserDOExample(userReqDTO)));
+        List<UserDO> userDOList = pageInfo.getList();
+        long total = pageInfo.getTotal();
         List<UserDTO> userDTOList = Lists.newArrayList();
-        if (CollectionUtil.isNotEmpty(userDOList))
-        {
-            userDTOList = userDOList.stream().map(user-> userConvert.userDO2UserDTO(user)).collect(Collectors.toList());
+        if (CollectionUtil.isNotEmpty(userDOList)) {
+            userDTOList = userDOList.stream().map(user -> userConvert.userDO2UserDTO(user)).collect(Collectors.toList());
         }
-        return new  PageResultDTO<>(pageInfo.getTotal(),userDTOList);
+        return new PageResultDTO<>(total, userDTOList);
     }
 
     @Override
     public Boolean insert(UserCreateDTO userCreateDTO) {
         UserDO userDO = userConvert.userCreateDTO2UserDO(userCreateDTO);
-        return userDOMapper.insertSelective(userDO) > 0;
+        userDO.setPassword("123456");
+        userDO.setCreatedTime(DateUtil.date());
+        userDO.setUpdatedTime(DateUtil.date());
+        return userMapper.insertSelective(userDO) > 0;
     }
 
     @Override
     public Boolean update(UserUpdateDTO userUpdateDTO) {
         UserDO userDO = userConvert.userUpdateDTO2UserDO(userUpdateDTO);
-        return userDOMapper.updateByPrimaryKeySelective(userDO) > 0;
+        userDO.setUpdatedTime(DateUtil.date());
+        return userMapper.updateByPrimaryKeySelective(userDO) > 0;
     }
 }
