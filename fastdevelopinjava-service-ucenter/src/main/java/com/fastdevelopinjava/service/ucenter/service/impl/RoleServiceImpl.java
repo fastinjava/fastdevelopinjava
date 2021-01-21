@@ -1,18 +1,25 @@
 package com.fastdevelopinjava.service.ucenter.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
+import com.fastdevelopinjava.framework.common.res.PageResultDTO;
 import com.fastdevelopinjava.service.ucenter.convert.RoleConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.RoleDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.RoleDO;
 import com.fastdevelopinjava.service.ucenter.model.RoleDOExample;
 import com.fastdevelopinjava.service.ucenter.service.RoleService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class RoleServiceImpl implements RoleService {
@@ -37,9 +44,22 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
+    public PageResultDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
+        PageHelper.startPage(roleReqDTO.getPageNum(),roleReqDTO.getPageSize(),true,true,!roleReqDTO.getPageable());
+        PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(roleReqDTO)));
+        long total = pageInfo.getTotal();
+        List<RoleDTO> roleDTOList  = Lists.newArrayList();
+        if (CollectionUtil.isNotEmpty(pageInfo.getList()))
+        {
+            roleDTOList = pageInfo.getList().stream().map(role->roleConvert.roleDO2RoleDTO(role)).collect(Collectors.toList());
+        }
+        return new PageResultDTO<>(total,roleDTOList);
+    }
+
+    @Override
     public RoleDTO getOne(RoleReqDTO roleReqDTO) {
         RoleDOExample roleDOExample = this.buildRoleExample(roleReqDTO);
-        roleDOExample.setOrderByClause("id desc limit 1");
+        roleDOExample.setOrderByClause("id  limit 1");
         RoleDO roleDO = roleMapper.selectByExample(roleDOExample).stream().findFirst().orElseGet(null);
         return null != roleDO ? roleConvert.roleDO2RoleDTO(roleDO) : null;
     }

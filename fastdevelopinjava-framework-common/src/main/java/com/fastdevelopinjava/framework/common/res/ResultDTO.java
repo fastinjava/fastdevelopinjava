@@ -15,6 +15,26 @@ public class ResultDTO<T> implements Serializable {
     public ResultDTO() {
     }
 
+
+    public static <T> ResultDTO<T> success(T data) {
+        ResultDTO<T> tResultDTO = new ResultDTO<>();
+        tResultDTO.setSuccess(true);
+        tResultDTO.setCode(CommonResultCode.SUCCESS.getCode());
+        tResultDTO.setMsg(CommonResultCode.SUCCESS.getMsg());
+        tResultDTO.setData(data);
+        return tResultDTO;
+    }
+
+
+    public static <T> ResultDTO<T> failure(String msg) {
+        ResultDTO<T> tResultDTO = new ResultDTO<>();
+        tResultDTO.setSuccess(false);
+        tResultDTO.setCode(CommonResultCode.FAILURE.getCode());
+        tResultDTO.setMsg(msg);
+        return tResultDTO;
+    }
+
+
     public Boolean getSuccess() {
         return success;
     }
