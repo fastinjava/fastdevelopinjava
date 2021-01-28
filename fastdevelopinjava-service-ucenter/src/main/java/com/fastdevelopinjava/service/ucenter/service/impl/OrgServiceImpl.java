@@ -13,6 +13,7 @@ import com.fastdevelopinjava.service.ucenter.mapper.OrganizationDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.OrganizationDO;
 import com.fastdevelopinjava.service.ucenter.model.OrganizationDOExample;
 import com.fastdevelopinjava.service.ucenter.service.OrgService;
+import com.github.benmanes.caffeine.cache.LoadingCache;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
@@ -23,6 +24,14 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * @Cacheable 触发缓存入口（这里一般放在创建和获取的方法上）
+ * @CacheEvict 触发缓存的eviction（用于删除的方法上）
+ * @CachePut 更新缓存且不影响方法执行（用于修改的方法上，该注解下的方法始终会被执行）
+ * @Caching 将多个缓存组合在一个方法上（该注解可以允许一个方法同时设置多个注解）
+ * @CacheConfig 在类级别设置一些缓存相关的共同配置（与其它缓存配合使用）
+ */
 @Slf4j
 @Service
 public class OrgServiceImpl
@@ -33,6 +42,9 @@ public class OrgServiceImpl
 
     @Resource
     OrgConvert orgConvert;
+
+    @Resource
+    LoadingCache loadingCache;
 
     /**
      * 根据organizationReqDTO构造example对象
@@ -59,12 +71,22 @@ public class OrgServiceImpl
 
     @Override
     public OrganizationDTO getOne(OrganizationReqDTO organizationReqDTO) {
-        OrganizationDOExample organizationDOExample = build(organizationReqDTO);
-        organizationDOExample.setOrderByClause("org_id asc limit 1");
-        List<OrganizationDO> organizationDOList = orgMapper.selectByExample(organizationDOExample);
-        OrganizationDO organizationDO = organizationDOList.stream().findFirst().orElseGet(null);
-        OrganizationDTO organizationDTO = orgConvert.organizationDO2OrganizationDTO(organizationDO);
-        return organizationDTO;
+        String cacheKey = this.getClass().getName() + "#getOne#" + organizationReqDTO.getOrgId();
+        Object cacheValue = loadingCache.get(cacheKey);
+        if (ObjectUtil.isNotEmpty(cacheValue)) {
+            return (OrganizationDTO) cacheValue;
+        } else {
+            log.info("=========>从数据库查找 , organizationReqDTO = {} ", JSONUtil.toJsonPrettyStr(organizationReqDTO));
+            OrganizationDOExample organizationDOExample = build(organizationReqDTO);
+            organizationDOExample.setOrderByClause("org_id asc limit 1");
+            List<OrganizationDO> organizationDOList = orgMapper.selectByExample(organizationDOExample);
+            OrganizationDO organizationDO = organizationDOList.stream().findFirst().orElseGet(null);
+            OrganizationDTO organizationDTO = orgConvert.organizationDO2OrganizationDTO(organizationDO);
+            if (ObjectUtil.isNotEmpty(organizationDTO)) {
+                loadingCache.put(cacheKey, organizationDTO);
+            }
+            return organizationDTO;
+        }
     }
 
     @Override

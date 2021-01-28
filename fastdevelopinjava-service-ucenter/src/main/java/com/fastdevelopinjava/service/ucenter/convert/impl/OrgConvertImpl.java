@@ -34,7 +34,6 @@ public class OrgConvertImpl implements OrgConvert {
         if (ObjectUtil.isNotEmpty(updateTime)) {
             organizationDTO.setUpdateTimeStr(DateUtil.formatDateTime(updateTime));
         }
-
         return organizationDTO;
     }
 

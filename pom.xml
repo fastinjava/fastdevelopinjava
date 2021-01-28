@@ -5,9 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fastdevelopinjava</groupId>
-    <artifactId>fastdevelopinjava-biz</artifactId>
+    <artifactId>fastdevelopinjava</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <!--阿里镜像源-->
+    <repositories>
+        <repository>
+            <id>maven-ali</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public//</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+        </repository>
+    </repositories>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
