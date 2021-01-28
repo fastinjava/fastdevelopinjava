@@ -69,7 +69,13 @@ public class OrgServiceImpl
 
     @Override
     public PageDTO<OrganizationDTO> getList(OrganizationReqDTO organizationReqDTO) {
-        PageHelper.startPage(organizationReqDTO.getPageNum(), organizationReqDTO.getPageSize(), true, true, !organizationReqDTO.getPageable());
+        PageHelper.startPage(
+                organizationReqDTO.getPageNum(),
+                organizationReqDTO.getPageable() ? organizationReqDTO.getPageSize() : 0,
+                true,
+                true,
+                !organizationReqDTO.getPageable() //默认分页true，如果不分页false，想要查询全部需要取反，且size=0
+        );
         OrganizationDOExample organizationDOExample = build(organizationReqDTO);
         organizationDOExample.setOrderByClause("org_id asc");
         PageInfo<OrganizationDO> pageInfo = new PageInfo<>(orgMapper.selectByExample(organizationDOExample));
@@ -78,7 +84,7 @@ public class OrgServiceImpl
         if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
             organizationDTOList = pageInfo.getList().stream().map(organizationDO -> orgConvert.organizationDO2OrganizationDTO(organizationDO)).collect(Collectors.toList());
         }
-        return new PageDTO<>(total,organizationDTOList);
+        return new PageDTO<>(total, organizationDTOList);
     }
 
     @Override
@@ -89,7 +95,9 @@ public class OrgServiceImpl
 
     @Override
     public Boolean update(OrganizationUpdateDTO organizationUpdateDTO) {
+        log.info("organizationUpdateDTO =========> {} ", organizationUpdateDTO);
         OrganizationDO organizationDO = orgConvert.organizationUpdateDTO2OrganizationDO(organizationUpdateDTO);
-        return orgMapper.insertSelective(organizationDO) > 0;
+        log.info("organizationDO =========> {} ", organizationDO);
+        return orgMapper.updateByPrimaryKeySelective(organizationDO) > 0;
     }
 }

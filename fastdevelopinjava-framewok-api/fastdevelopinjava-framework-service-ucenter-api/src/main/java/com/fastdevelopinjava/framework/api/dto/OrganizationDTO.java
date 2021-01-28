@@ -4,38 +4,59 @@ import java.util.Date;
 
 public class OrganizationDTO {
     /**
-    * 组织id
-    */
+     * 组织id
+     */
     private Integer orgId;
 
     /**
-    * 组织父id
-    */
+     * 组织父id
+     */
     private Integer orgPid;
 
     /**
-    * 组织名称
-    */
+     * 组织名称
+     */
     private String orgName;
 
     /**
-    * 组织编码
-    */
+     * 组织编码
+     */
     private String orgCode;
 
     /**
-    * 组织描述
-    */
+     * 组织描述
+     */
     private String orgDesc;
 
     /**
-    * 是否删除
-    */
+     * 是否删除
+     */
     private String deleteFlag;
 
     private Date creatTime;
 
+    private String creatTimeStr;
+
     private Date updateTime;
+
+    private String updateTimeStr;
+
+
+    public String getCreatTimeStr() {
+        return creatTimeStr;
+    }
+
+    public void setCreatTimeStr(String creatTimeStr) {
+        this.creatTimeStr = creatTimeStr;
+    }
+
+    public String getUpdateTimeStr() {
+        return updateTimeStr;
+    }
+
+    public void setUpdateTimeStr(String updateTimeStr) {
+        this.updateTimeStr = updateTimeStr;
+    }
 
     public Integer getOrgId() {
         return orgId;
