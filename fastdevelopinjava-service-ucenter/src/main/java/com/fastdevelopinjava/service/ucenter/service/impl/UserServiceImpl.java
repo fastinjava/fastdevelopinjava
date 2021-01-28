@@ -8,7 +8,7 @@ import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
 import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageResultDTO;
+import com.fastdevelopinjava.framework.common.res.PageDTO;
 import com.fastdevelopinjava.service.ucenter.convert.UserConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.UserDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.UserDO;
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public PageResultDTO<UserDTO> getList(UserReqDTO userReqDTO) {
+    public PageDTO<UserDTO> getList(UserReqDTO userReqDTO) {
         PageHelper.startPage(userReqDTO.getPageNum(), userReqDTO.getPageSize(), true, true, !userReqDTO.getPageable());
         PageInfo<UserDO> pageInfo = new PageInfo<>(userMapper.selectByExample(buildUserDOExample(userReqDTO)));
         List<UserDO> userDOList = pageInfo.getList();
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         if (CollectionUtil.isNotEmpty(userDOList)) {
             userDTOList = userDOList.stream().map(user -> userConvert.userDO2UserDTO(user)).collect(Collectors.toList());
         }
-        return new PageResultDTO<>(total, userDTOList);
+        return new PageDTO<>(total, userDTOList);
     }
 
     @Override

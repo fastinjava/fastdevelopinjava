@@ -5,7 +5,7 @@ import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.UserDTO;
 import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
 import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageResultDTO;
+import com.fastdevelopinjava.framework.common.res.PageDTO;
 import com.fastdevelopinjava.framework.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.UserService;
 import io.swagger.annotations.Api;
@@ -44,12 +44,12 @@ public class UserClientImpl implements UserClient {
     @ApiOperation("用户列表")
     @PostMapping("/selectList")
     @Override
-    public ResultDTO<PageResultDTO<UserDTO>> selectList(@RequestBody UserReqDTO userReqDTO) {
-        ResultDTO<PageResultDTO<UserDTO>> result = new ResultDTO<>();
+    public ResultDTO<PageDTO<UserDTO>> selectList(@RequestBody UserReqDTO userReqDTO) {
+        ResultDTO<PageDTO<UserDTO>> result = new ResultDTO<>();
         try {
-            PageResultDTO<UserDTO> pageResultDTO = userService.getList(userReqDTO);
+            PageDTO<UserDTO> pageDTO = userService.getList(userReqDTO);
             result.setSuccess(true);
-            result.setData(pageResultDTO);
+            result.setData(pageDTO);
         } catch (Exception e) {
             log.error("\ncom.fastdevelopinjava.service.ucenter.client.impl.UserClientImpl.selectList\n userReqDTO = {} \n  error = {} ", userReqDTO, e.getMessage());
             result.setSuccess(false);

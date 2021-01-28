@@ -40,3 +40,16 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (1, '1', '1', '1', 1, '2021-01-16 15:04:01', 1, 1, '2021-01-16 15:03:59');
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+
+create table if not exists role
+(
+	id int auto_increment comment '角色id'
+		primary key,
+	role_name varchar(100) null comment '角色名称',
+	role_code varchar(100) null comment '角色编码',
+	role_desc varchar(100) null comment '角色描述',
+	delete_flag varchar(100) default '0' null comment '是否删除',
+	creat_time timestamp default CURRENT_TIMESTAMP null,
+	update_time timestamp default CURRENT_TIMESTAMP null on update CURRENT_TIMESTAMP
+);

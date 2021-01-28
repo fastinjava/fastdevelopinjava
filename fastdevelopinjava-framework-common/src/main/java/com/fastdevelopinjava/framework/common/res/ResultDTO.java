@@ -12,6 +12,9 @@ public class ResultDTO<T> implements Serializable {
     private String msg;
     private T data;
 
+
+
+
     public ResultDTO() {
     }
 

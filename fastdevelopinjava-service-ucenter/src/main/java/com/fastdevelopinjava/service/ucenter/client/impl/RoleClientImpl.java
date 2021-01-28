@@ -5,7 +5,7 @@ import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageResultDTO;
+import com.fastdevelopinjava.framework.common.res.PageDTO;
 import com.fastdevelopinjava.framework.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.RoleService;
 import io.swagger.annotations.Api;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.naming.spi.ResolveResult;
 import static com.fastdevelopinjava.framework.common.res.ResultDTO.*;
 
 @Api(value = "角色管理", tags = {"角色管理api"})
@@ -48,16 +47,14 @@ public class RoleClientImpl implements RoleClient {
 
     @PostMapping("/getList")
     @Override
-    public ResultDTO<PageResultDTO<RoleDTO>> getList(@RequestBody
+    public ResultDTO<PageDTO<RoleDTO>> getList(@RequestBody
                                                              RoleReqDTO roleReqDTO) {
         try {
-            PageResultDTO<RoleDTO> pageResultDTO = roleService.getList(roleReqDTO);
-            ResultDTO<PageResultDTO<RoleDTO>> resultDTO = ResultDTO.success(pageResultDTO);
-            return resultDTO;
+            PageDTO<RoleDTO> pageDTO = roleService.getList(roleReqDTO);
+            return success(pageDTO);
         } catch (Exception e) {
             log.error("com.fastdevelopinjava.service.ucenter.client.impl.RoleClientImpl.getList error = {} , roleReqDTO = {} ", e.getMessage(), roleReqDTO);
-            ResultDTO<PageResultDTO<RoleDTO>> resultDTO = ResultDTO.failure(e.getMessage());
-            return resultDTO;
+            return failure(e.getMessage());
         }
     }
 

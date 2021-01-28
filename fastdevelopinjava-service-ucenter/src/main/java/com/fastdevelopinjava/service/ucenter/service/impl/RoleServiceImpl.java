@@ -5,7 +5,7 @@ import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
 import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageResultDTO;
+import com.fastdevelopinjava.framework.common.res.PageDTO;
 import com.fastdevelopinjava.service.ucenter.convert.RoleConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.RoleDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.RoleDO;
@@ -44,7 +44,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageResultDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
+    public PageDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
         PageHelper.startPage(roleReqDTO.getPageNum(),roleReqDTO.getPageSize(),true,true,!roleReqDTO.getPageable());
         PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(roleReqDTO)));
         long total = pageInfo.getTotal();
@@ -53,7 +53,7 @@ public class RoleServiceImpl implements RoleService {
         {
             roleDTOList = pageInfo.getList().stream().map(role->roleConvert.roleDO2RoleDTO(role)).collect(Collectors.toList());
         }
-        return new PageResultDTO<>(total,roleDTOList);
+        return new PageDTO<>(total,roleDTOList);
     }
 
     @Override
