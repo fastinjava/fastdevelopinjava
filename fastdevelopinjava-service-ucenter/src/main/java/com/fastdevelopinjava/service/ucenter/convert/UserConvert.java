@@ -1,9 +1,9 @@
 package com.fastdevelopinjava.service.ucenter.convert;
 
-import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.UserDTO;
-import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
-import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.model.UserDO;
 
 public interface UserConvert {

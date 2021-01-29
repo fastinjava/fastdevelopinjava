@@ -1,17 +1,20 @@
 package com.fastdevelopinjava.service.ucenter.client.impl;
 
-import com.fastdevelopinjava.framework.api.client.UserClient;
-import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.UserDTO;
-import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
-import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageDTO;
-import com.fastdevelopinjava.framework.common.res.ResultDTO;
+import com.fastdevelopinjava.framework.ucenter.api.client.UserClient;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 

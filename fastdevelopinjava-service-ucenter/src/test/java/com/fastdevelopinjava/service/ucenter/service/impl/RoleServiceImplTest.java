@@ -5,12 +5,11 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.service.RoleService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class RoleServiceImplTest {

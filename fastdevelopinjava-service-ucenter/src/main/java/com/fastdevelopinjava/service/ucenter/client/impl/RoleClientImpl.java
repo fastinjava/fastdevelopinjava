@@ -1,12 +1,12 @@
 package com.fastdevelopinjava.service.ucenter.client.impl;
 
-import com.fastdevelopinjava.framework.api.client.RoleClient;
-import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageDTO;
-import com.fastdevelopinjava.framework.common.res.ResultDTO;
+import com.fastdevelopinjava.framework.ucenter.api.client.RoleClient;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.RoleService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import static com.fastdevelopinjava.framework.common.res.ResultDTO.*;
+
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
 
 @Api(value = "角色管理", tags = {"角色管理api"})
 @Slf4j

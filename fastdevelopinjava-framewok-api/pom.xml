@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>fastdevelopinjava-framework-service-ucenter-api</module>
+        <module>fastdevelopinjava-framework-service-system-api</module>
     </modules>
 
     <properties>

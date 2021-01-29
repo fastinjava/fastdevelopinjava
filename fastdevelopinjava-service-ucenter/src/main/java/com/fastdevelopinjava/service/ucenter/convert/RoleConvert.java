@@ -1,9 +1,9 @@
 package com.fastdevelopinjava.service.ucenter.convert;
 
-import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.model.RoleDO;
 
 public interface RoleConvert {

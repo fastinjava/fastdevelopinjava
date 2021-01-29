@@ -39,6 +39,7 @@
         <module>fastdevelopinjava-service-gateway</module>
         <module>fastdevelopinjava-framewok-api</module>
         <module>fastdevelopinjava-service-ucenter</module>
+        <module>fastdevelopinjava-service-system</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

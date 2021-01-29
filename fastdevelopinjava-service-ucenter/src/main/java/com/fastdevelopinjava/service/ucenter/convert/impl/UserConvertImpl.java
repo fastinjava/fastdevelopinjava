@@ -1,18 +1,14 @@
 package com.fastdevelopinjava.service.ucenter.convert.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.fastdevelopinjava.framework.api.dto.UserCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.UserDTO;
-import com.fastdevelopinjava.framework.api.dto.UserReqDTO;
-import com.fastdevelopinjava.framework.api.dto.UserUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.UserUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.convert.UserConvert;
-import com.fastdevelopinjava.service.ucenter.mapper.UserDOMapper;
 import com.fastdevelopinjava.service.ucenter.model.UserDO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.DeleteMapping;
-
-import javax.annotation.Resource;
 
 /**
  * user转换实现类

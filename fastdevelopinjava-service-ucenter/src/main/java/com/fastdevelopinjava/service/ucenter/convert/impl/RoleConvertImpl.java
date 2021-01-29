@@ -1,10 +1,10 @@
 package com.fastdevelopinjava.service.ucenter.convert.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.fastdevelopinjava.framework.api.dto.RoleCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleReqDTO;
-import com.fastdevelopinjava.framework.api.dto.RoleUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.RoleUpdateDTO;
 import com.fastdevelopinjava.service.ucenter.convert.RoleConvert;
 import com.fastdevelopinjava.service.ucenter.model.RoleDO;
 import lombok.extern.slf4j.Slf4j;

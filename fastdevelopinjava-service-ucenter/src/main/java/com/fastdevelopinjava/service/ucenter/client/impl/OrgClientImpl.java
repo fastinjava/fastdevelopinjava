@@ -1,12 +1,12 @@
 package com.fastdevelopinjava.service.ucenter.client.impl;
 
-import com.fastdevelopinjava.framework.api.client.OrgClient;
-import com.fastdevelopinjava.framework.api.dto.OrganizationCreateDTO;
-import com.fastdevelopinjava.framework.api.dto.OrganizationDTO;
-import com.fastdevelopinjava.framework.api.dto.OrganizationReqDTO;
-import com.fastdevelopinjava.framework.api.dto.OrganizationUpdateDTO;
-import com.fastdevelopinjava.framework.common.res.PageDTO;
-import com.fastdevelopinjava.framework.common.res.ResultDTO;
+import com.fastdevelopinjava.framework.ucenter.api.client.OrgClient;
+import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationReqDTO;
+import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.OrgService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static com.fastdevelopinjava.framework.common.res.ResultDTO.failure;
-import static com.fastdevelopinjava.framework.common.res.ResultDTO.success;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
 
 @Api(value = "组织管理", tags = {"组织管理api"})
 @Slf4j
