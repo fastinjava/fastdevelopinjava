@@ -1,8 +1,18 @@
 package com.fastdevelopinjava.framework.system.api.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ApplicationReqDTO {
+public class ApplicationReqDTO implements Serializable {
+
+
+    //默认分页，第一页
+    private Integer pageNum = 0;
+    //默认分页大小 10
+    private Integer pageSize = 10;
+    //默认分页
+    private Boolean pageable = true;
+
     /**
      * app id
      */
@@ -36,6 +46,31 @@ public class ApplicationReqDTO {
     private Date creatTime;
 
     private Date updateTime;
+
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public Boolean getPageable() {
+        return pageable;
+    }
+
+    public void setPageable(Boolean pageable) {
+        this.pageable = pageable;
+    }
 
     public Integer getAppId() {
         return appId;

@@ -31,9 +31,20 @@ spring:
             - Path=/gateway/demo2/**
           filters:
             - StripPrefix=1
+
+
         - id: fastdevelopinjava-service-ucenter
           uri: lb://fastdevelopinjava-service-ucenter
           predicates:
             - Path=/gateway/fastdevelopinjava-service-ucenter/**
+          filters:
+            - StripPrefix=1
+
+
+
+        - id: fastdevelopinjava-service-system
+          uri: lb://fastdevelopinjava-service-system
+          predicates:
+            - Path=/gateway/fastdevelopinjava-service-system/**
           filters:
             - StripPrefix=1

@@ -1,16 +1,20 @@
 package com.fastdevelopinjava.framework.ucenter.api.dto;
 
+import com.fastdevelopinjava.framework.common.condition.FieldNotNull;
+import com.fastdevelopinjava.framework.common.condition.ParamCheck;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@ParamCheck(value = true)
 public class RoleUpdateDTO
         implements Serializable {
     /**
      * 角色id
      */
+    @FieldNotNull
     private Integer id;
 
     /**
@@ -37,5 +41,8 @@ public class RoleUpdateDTO
 
     private Date updateTime;
 
+
+    interface Update {
+    }
 
 }
