@@ -1,10 +1,12 @@
 package com.fastdevelopinjava.service.ucenter.client.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.fastdevelopinjava.framework.ucenter.api.client.OrgClient;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.NodeDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
 import com.fastdevelopinjava.service.ucenter.service.OrgService;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
 import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
@@ -35,7 +38,7 @@ public class OrgClientImpl implements OrgClient {
         try {
             return success(orgService.getList(organizationReqDTO));
         } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getList error = {} , organizationReqDTO = {} ", e.getMessage(), organizationReqDTO);
+            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getList error = {} , organizationReqDTO = {} ", e.getMessage(), JSONUtil.toJsonPrettyStr(organizationReqDTO));
             return failure(e.getMessage());
         }
     }
@@ -70,6 +73,18 @@ public class OrgClientImpl implements OrgClient {
             return success(orgService.update(organizationUpdateDTO));
         } catch (Exception e) {
             log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.update error = {} , organizationUpdateDTO = {} ", e.getMessage(), organizationUpdateDTO);
+            return failure(e.getMessage());
+        }
+    }
+
+    @PostMapping("/listTree")
+    @Override
+    public ResultDTO<List<NodeDTO>> listTree(@RequestBody OrganizationReqDTO organizationReqDTO) {
+        try {
+            List<NodeDTO> nodeDTOList = orgService.listTree(organizationReqDTO);
+            return success(nodeDTOList);
+        } catch (Exception e) {
+            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.listTree error = {} , organizationReqDTO = {} ", e.getMessage(), JSONUtil.toJsonPrettyStr(organizationReqDTO));
             return failure(e.getMessage());
         }
     }

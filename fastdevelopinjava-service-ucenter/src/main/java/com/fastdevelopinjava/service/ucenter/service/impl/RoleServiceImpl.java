@@ -45,15 +45,19 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public PageDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
-        PageHelper.startPage(roleReqDTO.getPageNum(),roleReqDTO.getPageSize(),true,true,!roleReqDTO.getPageable());
+        PageHelper.startPage(
+                roleReqDTO.getPageNum(),
+                roleReqDTO.getPageable() ? roleReqDTO.getPageSize() : 0,
+                true,
+                true,
+                !roleReqDTO.getPageable());
         PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(roleReqDTO)));
         long total = pageInfo.getTotal();
-        List<RoleDTO> roleDTOList  = Lists.newArrayList();
-        if (CollectionUtil.isNotEmpty(pageInfo.getList()))
-        {
-            roleDTOList = pageInfo.getList().stream().map(role->roleConvert.roleDO2RoleDTO(role)).collect(Collectors.toList());
+        List<RoleDTO> roleDTOList = Lists.newArrayList();
+        if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
+            roleDTOList = pageInfo.getList().stream().map(role -> roleConvert.roleDO2RoleDTO(role)).collect(Collectors.toList());
         }
-        return new PageDTO<>(total,roleDTOList);
+        return new PageDTO<>(total, roleDTOList);
     }
 
     @Override

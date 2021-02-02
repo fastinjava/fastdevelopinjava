@@ -13,6 +13,7 @@ import com.fastdevelopinjava.service.system.service.ApplicationService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,15 +22,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ApplicationServiceImpl implements ApplicationService {
-
-
     @Resource
     private ApplicationDOMapper applicationMapper;
-
-
     @Resource
     private ApplicationConvert applicationConvert;
-
 
     private ApplicationDOExample build(ApplicationReqDTO applicationReqDTO) {
         ApplicationDOExample applicationDOExample = new ApplicationDOExample();
@@ -39,6 +35,12 @@ public class ApplicationServiceImpl implements ApplicationService {
         String appCode = applicationReqDTO.getAppCode();
         if (ObjectUtil.isNotEmpty(appId)) {
             criteria.andAppIdEqualTo(appId);
+        }
+        if (StringUtils.isNotEmpty(appName)) {
+            criteria.andAppNameLike("%" + appName.trim() + "%");
+        }
+        if (StringUtils.isNotEmpty(appCode)) {
+            criteria.andAppCodeEqualTo(appCode);
         }
         return applicationDOExample;
     }

@@ -4,8 +4,11 @@ import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.NodeDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
+
+import java.util.List;
 
 public interface OrgClient {
 
@@ -29,4 +32,5 @@ public interface OrgClient {
 
     ResultDTO<Boolean> update(OrganizationUpdateDTO organizationUpdateDTO);
 
+    ResultDTO<List<NodeDTO>> listTree(OrganizationReqDTO organizationReqDTO);
 }

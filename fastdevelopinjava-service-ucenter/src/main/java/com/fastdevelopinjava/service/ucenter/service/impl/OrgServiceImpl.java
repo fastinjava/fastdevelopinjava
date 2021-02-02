@@ -7,6 +7,7 @@ import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationUpdateDTO;
+import com.fastdevelopinjava.framework.ucenter.common.res.NodeDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.service.ucenter.convert.OrgConvert;
 import com.fastdevelopinjava.service.ucenter.mapper.OrganizationDOMapper;
@@ -105,5 +106,12 @@ public class OrgServiceImpl
         OrganizationDO organizationDO = orgConvert.organizationUpdateDTO2OrganizationDO(organizationUpdateDTO);
         log.info("organizationDO =========> {} ", organizationDO);
         return orgMapper.updateByPrimaryKeySelective(organizationDO) > 0;
+    }
+
+    @Override
+    public List<NodeDTO> listTree(OrganizationReqDTO organizationReqDTO) {
+        log.info("organizationReqDTO =========> {} ", organizationReqDTO);
+        List<NodeDTO> nodeDTOList = orgMapper.listTree(organizationReqDTO);
+        return nodeDTOList;
     }
 }
