@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fastdevelopinjava.service.system.mapper.ApplicationDOMapper">
+    <resultMap id="BaseResultMap" type="com.fastdevelopinjava.service.system.model.ApplicationDO">
+        <!--@mbg.generated-->
+        <!--@Table application-->
+        <id column="app_id" jdbcType="INTEGER" property="appId"/>
+        <result column="app_name" jdbcType="VARCHAR" property="appName"/>
+        <result column="app_code" jdbcType="VARCHAR" property="appCode"/>
+        <result column="app_desc" jdbcType="VARCHAR" property="appDesc"/>
+        <result column="app_type" jdbcType="VARCHAR" property="appType"/>
+        <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag"/>
+        <result column="creat_time" jdbcType="TIMESTAMP" property="creatTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <!--@mbg.generated-->
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <!--@mbg.generated-->
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        app_id, app_name, app_code, app_desc, app_type, delete_flag, creat_time, update_time
+    </sql>
+    <select id="selectByExample" parameterType="com.fastdevelopinjava.service.system.model.ApplicationDOExample"
+            resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from application
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from application
+        where app_id = #{appId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from application
+        where app_id = #{appId,jdbcType=INTEGER}
+    </delete>
+    <delete id="deleteByExample" parameterType="com.fastdevelopinjava.service.system.model.ApplicationDOExample">
+        <!--@mbg.generated-->
+        delete from application
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" keyColumn="app_id" keyProperty="appId"
+            parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into application (app_name, app_code, app_desc,
+        app_type, delete_flag, creat_time,
+        update_time)
+        values (#{appName,jdbcType=VARCHAR}, #{appCode,jdbcType=VARCHAR}, #{appDesc,jdbcType=VARCHAR},
+        #{appType,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP},
+        #{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" keyColumn="app_id" keyProperty="appId"
+            parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appName != null">
+                app_name,
+            </if>
+            <if test="appCode != null">
+                app_code,
+            </if>
+            <if test="appDesc != null">
+                app_desc,
+            </if>
+            <if test="appType != null">
+                app_type,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="creatTime != null">
+                creat_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="appName != null">
+                #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appCode != null">
+                #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.fastdevelopinjava.service.system.model.ApplicationDOExample"
+            resultType="java.lang.Long">
+        <!--@mbg.generated-->
+        select count(*) from application
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        <!--@mbg.generated-->
+        update application
+        <set>
+            <if test="record.appId != null">
+                app_id = #{record.appId,jdbcType=INTEGER},
+            </if>
+            <if test="record.appName != null">
+                app_name = #{record.appName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.appCode != null">
+                app_code = #{record.appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.appDesc != null">
+                app_desc = #{record.appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="record.appType != null">
+                app_type = #{record.appType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.deleteFlag != null">
+                delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creatTime != null">
+                creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null">
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        <!--@mbg.generated-->
+        update application
+        set app_id = #{record.appId,jdbcType=INTEGER},
+        app_name = #{record.appName,jdbcType=VARCHAR},
+        app_code = #{record.appCode,jdbcType=VARCHAR},
+        app_desc = #{record.appDesc,jdbcType=VARCHAR},
+        app_type = #{record.appType,jdbcType=VARCHAR},
+        delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+        creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO">
+        <!--@mbg.generated-->
+        update application
+        <set>
+            <if test="appName != null">
+                app_name = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appCode != null">
+                app_code = #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                app_desc = #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                app_type = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creat_time = #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where app_id = #{appId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO">
+        <!--@mbg.generated-->
+        update application
+        set app_name = #{appName,jdbcType=VARCHAR},
+        app_code = #{appCode,jdbcType=VARCHAR},
+        app_desc = #{appDesc,jdbcType=VARCHAR},
+        app_type = #{appType,jdbcType=VARCHAR},
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where app_id = #{appId,jdbcType=INTEGER}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update application
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="app_name = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.appName,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="app_code = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.appCode,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="app_desc = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.appDesc,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="app_type = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.appType,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="delete_flag = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.deleteFlag,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="creat_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.creatTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when app_id = #{item.appId,jdbcType=INTEGER} then #{item.updateTime,jdbcType=TIMESTAMP}
+                </foreach>
+            </trim>
+        </trim>
+        where app_id in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.appId,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    <insert id="batchInsert" keyColumn="app_id" keyProperty="appId" parameterType="map" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into application
+        (app_name, app_code, app_desc, app_type, delete_flag, creat_time, update_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.appName,jdbcType=VARCHAR}, #{item.appCode,jdbcType=VARCHAR}, #{item.appDesc,jdbcType=VARCHAR},
+            #{item.appType,jdbcType=VARCHAR}, #{item.deleteFlag,jdbcType=VARCHAR}, #{item.creatTime,jdbcType=TIMESTAMP},
+            #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" keyColumn="app_id" keyProperty="appId"
+            parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            app_name,
+            app_code,
+            app_desc,
+            app_type,
+            delete_flag,
+            creat_time,
+            update_time,
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=INTEGER},
+            </if>
+            #{appName,jdbcType=VARCHAR},
+            #{appCode,jdbcType=VARCHAR},
+            #{appDesc,jdbcType=VARCHAR},
+            #{appType,jdbcType=VARCHAR},
+            #{deleteFlag,jdbcType=VARCHAR},
+            #{creatTime,jdbcType=TIMESTAMP},
+            #{updateTime,jdbcType=TIMESTAMP},
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=INTEGER},
+            </if>
+            app_name = #{appName,jdbcType=VARCHAR},
+            app_code = #{appCode,jdbcType=VARCHAR},
+            app_desc = #{appDesc,jdbcType=VARCHAR},
+            app_type = #{appType,jdbcType=VARCHAR},
+            delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+            creat_time = #{creatTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </trim>
+    </insert>
+    <insert id="insertOrUpdateSelective" keyColumn="app_id" keyProperty="appId"
+            parameterType="com.fastdevelopinjava.service.system.model.ApplicationDO" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into application
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="appName != null">
+                app_name,
+            </if>
+            <if test="appCode != null">
+                app_code,
+            </if>
+            <if test="appDesc != null">
+                app_desc,
+            </if>
+            <if test="appType != null">
+                app_type,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="creatTime != null">
+                creat_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="appId != null">
+                #{appId,jdbcType=INTEGER},
+            </if>
+            <if test="appName != null">
+                #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appCode != null">
+                #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="appId != null">
+                app_id = #{appId,jdbcType=INTEGER},
+            </if>
+            <if test="appName != null">
+                app_name = #{appName,jdbcType=VARCHAR},
+            </if>
+            <if test="appCode != null">
+                app_code = #{appCode,jdbcType=VARCHAR},
+            </if>
+            <if test="appDesc != null">
+                app_desc = #{appDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="appType != null">
+                app_type = #{appType,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+            </if>
+            <if test="creatTime != null">
+                creat_time = #{creatTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+</mapper>
