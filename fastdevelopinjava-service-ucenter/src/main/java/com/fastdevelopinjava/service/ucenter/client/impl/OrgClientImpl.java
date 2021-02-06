@@ -35,6 +35,7 @@ public class OrgClientImpl implements OrgClient {
     @PostMapping("/getList")
     @Override
     public ResultDTO<PageDTO<OrganizationDTO>> getList(@RequestBody OrganizationReqDTO organizationReqDTO) {
+        log.info("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getList ，organizationReqDTO = {}", JSONUtil.toJsonPrettyStr(organizationReqDTO));
         try {
             return success(orgService.getList(organizationReqDTO));
         } catch (Exception e) {
