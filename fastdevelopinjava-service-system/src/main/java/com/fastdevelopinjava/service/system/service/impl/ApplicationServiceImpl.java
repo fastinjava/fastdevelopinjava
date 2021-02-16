@@ -3,6 +3,7 @@ package com.fastdevelopinjava.service.system.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDTO;
+import com.fastdevelopinjava.framework.system.api.dto.ApplicationDeleteDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.service.system.convert.ApplicationConvert;
@@ -46,17 +47,21 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
+    public Boolean delete(ApplicationDeleteDTO applicationDeleteDTO) {
+        ApplicationReqDTO applicationReqDTO = new ApplicationReqDTO();
+        Integer appId = applicationDeleteDTO.getAppId();
+        applicationDeleteDTO.setAppId(appId);
+        ApplicationDO applicationDo = new ApplicationDO();
+        applicationDo.setAppId(appId);
+        applicationDo.setDeleteFlag("1");
+        int result = applicationMapper.updateByExampleSelective(applicationDo, this.build(applicationReqDTO));
+        return result > 0;
+    }
+
+    @Override
     public PageDTO<ApplicationDTO> getList(ApplicationReqDTO applicationReqDTO) {
-        PageHelper.startPage(
-                applicationReqDTO.getPageNum(),
-                applicationReqDTO.getPageable() ? applicationReqDTO.getPageSize() : 0,
-                true,
-                true,
-                !applicationReqDTO.getPageable()
-        );
-        ApplicationDOExample applicationDOExample = this.build(applicationReqDTO);
-        List<ApplicationDO> applicationDOList = applicationMapper.selectByExample(applicationDOExample);
-        PageInfo<ApplicationDO> pageInfo = new PageInfo<>(applicationDOList);
+        PageHelper.startPage(applicationReqDTO.getPageNum(), applicationReqDTO.getPageable() ? applicationReqDTO.getPageSize() : 0, true, true, !applicationReqDTO.getPageable());
+        PageInfo<ApplicationDO> pageInfo = new PageInfo<>(applicationMapper.selectByExample(this.build(applicationReqDTO)));
         List<ApplicationDTO> applicationDTOList = Lists.newArrayList();
         if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
             applicationDTOList = pageInfo.getList().stream()
@@ -71,7 +76,6 @@ public class ApplicationServiceImpl implements ApplicationService {
         ApplicationDOExample applicationDOExample = this.build(applicationReqDTO);
         applicationDOExample.setOrderByClause("app_id asc limit 1");
         ApplicationDO applicationDO = applicationMapper.selectByExample(applicationDOExample).stream().findFirst().orElseGet(null);
-        ApplicationDTO applicationDTO = applicationConvert.applicationDO2ApplicationDTO(applicationDO);
-        return applicationDTO;
+        return applicationConvert.applicationDO2ApplicationDTO(applicationDO);
     }
 }

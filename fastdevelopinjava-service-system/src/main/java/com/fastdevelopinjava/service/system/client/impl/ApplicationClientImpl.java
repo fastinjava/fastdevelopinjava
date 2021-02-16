@@ -2,6 +2,7 @@ package com.fastdevelopinjava.service.system.client.impl;
 
 import com.fastdevelopinjava.framework.system.api.client.ApplicationClient;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDTO;
+import com.fastdevelopinjava.framework.system.api.dto.ApplicationDeleteDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
 import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
 
 @Api(value = "应用管理", tags = {"应用管理api"})
@@ -31,18 +31,20 @@ public class ApplicationClientImpl implements ApplicationClient {
     @PostMapping("/getOne")
     @Override
     public ResultDTO<ApplicationDTO> getOne(@RequestBody ApplicationReqDTO applicationReqDTO) {
-        try {
-            ApplicationDTO applicationDTO = applicationService.getOne(applicationReqDTO);
-            return success(applicationDTO);
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.system.client.impl.ApplicationClientImpl#getOne error , message = {} , applicationReqDTO = {}", e.getMessage(), applicationReqDTO);
-            return failure(e.getMessage());
-        }
-
+        return success(applicationService.getOne(applicationReqDTO));
     }
 
+
+    @PostMapping("/getList")
     @Override
-    public ResultDTO<PageDTO<ApplicationDTO>> getList(ApplicationReqDTO applicationReqDTO) {
-        return null;
+    public ResultDTO<PageDTO<ApplicationDTO>> getList(@RequestBody ApplicationReqDTO applicationReqDTO) {
+        return success(applicationService.getList(applicationReqDTO));
+    }
+
+
+    @PostMapping("/delete")
+    @Override
+    public ResultDTO<Boolean> delete(ApplicationDeleteDTO applicationDeleteDTO) {
+        return success(applicationService.delete(applicationDeleteDTO));
     }
 }
