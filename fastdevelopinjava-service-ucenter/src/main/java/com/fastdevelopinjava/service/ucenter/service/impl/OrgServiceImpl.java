@@ -56,7 +56,14 @@ public class OrgServiceImpl
         if (ObjectUtil.isNotEmpty(organizationReqDTO.getOrgName())) {
             criteria.andOrgNameEqualTo(organizationReqDTO.getOrgName());
         }
-
+        if (ObjectUtil.isNotEmpty(organizationReqDTO.getOrgPid()))
+        {
+            criteria.andOrgPidEqualTo(organizationReqDTO.getOrgPid());
+        }
+        if (ObjectUtil.isNotEmpty(organizationReqDTO.getDeleteFlag()))
+        {
+            criteria.andDeleteFlagEqualTo(organizationReqDTO.getDeleteFlag());
+        }
         return organizationDOExample;
 
     }
@@ -81,6 +88,8 @@ public class OrgServiceImpl
                 true,
                 !organizationReqDTO.getPageable() //默认分页true，如果不分页false，想要查询全部需要取反，且size=0
         );
+
+        organizationReqDTO.setDeleteFlag("0");
         OrganizationDOExample organizationDOExample = build(organizationReqDTO);
         organizationDOExample.setOrderByClause("org_id asc");
         PageInfo<OrganizationDO> pageInfo = new PageInfo<>(orgMapper.selectByExample(organizationDOExample));

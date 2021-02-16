@@ -35,58 +35,32 @@ public class OrgClientImpl implements OrgClient {
     @PostMapping("/getList")
     @Override
     public ResultDTO<PageDTO<OrganizationDTO>> getList(@RequestBody OrganizationReqDTO organizationReqDTO) {
-        log.info("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getList ，organizationReqDTO = {}", JSONUtil.toJsonPrettyStr(organizationReqDTO));
-        try {
-            return success(orgService.getList(organizationReqDTO));
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getList error = {} , organizationReqDTO = {} ", e.getMessage(), JSONUtil.toJsonPrettyStr(organizationReqDTO));
-            return failure(e.getMessage());
-        }
+        return success(orgService.getList(organizationReqDTO));
     }
 
     @PostMapping("/getOne")
     @Override
     public ResultDTO<OrganizationDTO> getOne(@RequestBody OrganizationReqDTO organizationReqDTO) {
-        try {
-            return success(orgService.getOne(organizationReqDTO));
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.getOne error = {} , organizationReqDTO = {} ", e.getMessage(), organizationReqDTO);
-            return failure(e.getMessage());
-        }
+        return success(orgService.getOne(organizationReqDTO));
     }
 
 
     @PostMapping("/insert")
     @Override
     public ResultDTO<Boolean> insert(@RequestBody OrganizationCreateDTO organizationCreateDTO) {
-        try {
-            return success(orgService.insert(organizationCreateDTO));
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.insert error = {} , organizationCreateDTO = {} ", e.getMessage(), organizationCreateDTO);
-            return failure(e.getMessage());
-        }
+        return success(orgService.insert(organizationCreateDTO));
+
     }
 
     @PostMapping("/update")
     @Override
     public ResultDTO<Boolean> update(@RequestBody OrganizationUpdateDTO organizationUpdateDTO) {
-        try {
-            return success(orgService.update(organizationUpdateDTO));
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.update error = {} , organizationUpdateDTO = {} ", e.getMessage(), organizationUpdateDTO);
-            return failure(e.getMessage());
-        }
+        return success(orgService.update(organizationUpdateDTO));
     }
 
     @PostMapping("/listTree")
     @Override
     public ResultDTO<List<NodeDTO>> listTree(@RequestBody OrganizationReqDTO organizationReqDTO) {
-        try {
-            List<NodeDTO> nodeDTOList = orgService.listTree(organizationReqDTO);
-            return success(nodeDTOList);
-        } catch (Exception e) {
-            log.error("com.fastdevelopinjava.service.ucenter.client.impl.OrgClientImpl.listTree error = {} , organizationReqDTO = {} ", e.getMessage(), JSONUtil.toJsonPrettyStr(organizationReqDTO));
-            return failure(e.getMessage());
-        }
+        return success(orgService.listTree(organizationReqDTO));
     }
 }
