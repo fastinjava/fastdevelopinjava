@@ -4,7 +4,7 @@
  * 注意：
  * 本软件为www.yixiang.co开发研制
  */
-package com.fastdevelopinjava.framework.ucenter.utils.spring;
+package com.fastdevelopinjava.framework.ucenter.utils.thread;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

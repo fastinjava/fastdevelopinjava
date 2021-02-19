@@ -1,5 +1,7 @@
 
-package com.fastdevelopinjava.framework.ucenter.utils.spring;
+package com.fastdevelopinjava.framework.ucenter.utils.thread;
+
+import com.fastdevelopinjava.framework.ucenter.utils.spring.SpringContextHolder;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
