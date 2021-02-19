@@ -4,7 +4,7 @@
  * 注意：
  * 本软件为www.yixiang.co开发研制
  */
-package com.fastdevelopinjava.framework.ucenter.utils.response.exception;
+package com.fastdevelopinjava.framework.ucenter.utils.exception;
 
 
 import java.io.PrintWriter;

@@ -1,4 +1,4 @@
-package com.fastdevelopinjava.framework.ucenter.utils.response.spring;
+package com.fastdevelopinjava.framework.ucenter.utils.spring;
 
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;

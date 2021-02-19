@@ -7,7 +7,7 @@ import com.fastdevelopinjava.framework.system.api.dto.ApiInfoInsertDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoReqDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
-import com.fastdevelopinjava.framework.ucenter.utils.response.exception.ThrowableUtil;
+import com.fastdevelopinjava.framework.ucenter.utils.exception.ThrowableUtil;
 import com.fastdevelopinjava.service.system.service.ApiInfoService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
