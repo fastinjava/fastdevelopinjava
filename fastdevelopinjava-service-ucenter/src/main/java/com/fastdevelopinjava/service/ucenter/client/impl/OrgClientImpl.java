@@ -1,6 +1,5 @@
 package com.fastdevelopinjava.service.ucenter.client.impl;
 
-import cn.hutool.json.JSONUtil;
 import com.fastdevelopinjava.framework.ucenter.api.client.OrgClient;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
@@ -55,7 +54,11 @@ public class OrgClientImpl implements OrgClient {
     @PostMapping("/update")
     @Override
     public ResultDTO<Boolean> update(@RequestBody OrganizationUpdateDTO organizationUpdateDTO) {
-        return success(orgService.update(organizationUpdateDTO));
+        try {
+            return success(orgService.update(organizationUpdateDTO));
+        } catch (Exception e) {
+            return failure(e.getMessage());
+        }
     }
 
     @PostMapping("/listTree")

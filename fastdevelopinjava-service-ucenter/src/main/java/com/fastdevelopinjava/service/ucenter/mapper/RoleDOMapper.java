@@ -2,8 +2,9 @@ package com.fastdevelopinjava.service.ucenter.mapper;
 
 import com.fastdevelopinjava.service.ucenter.model.RoleDO;
 import com.fastdevelopinjava.service.ucenter.model.RoleDOExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface RoleDOMapper {
     long countByExample(RoleDOExample example);

@@ -5,6 +5,7 @@
     <!--@mbg.generated-->
     <!--@Table role-->
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_id" jdbcType="INTEGER" property="orgId"/>
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
     <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
     <result column="role_desc" jdbcType="VARCHAR" property="roleDesc" />
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, role_name, role_code, role_desc, delete_flag, creat_time, update_time
+      id, org_id, role_name, role_code, role_desc, delete_flag, creat_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDOExample" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -112,27 +113,30 @@
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into role (role_name, role_code, role_desc, 
-      delete_flag, creat_time, update_time
-      )
-    values (#{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{roleDesc,jdbcType=VARCHAR}, 
-      #{deleteFlag,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+      insert into role (org_id, role_name, role_code,
+      role_desc, delete_flag, creat_time,
+      update_time)
+      values (#{orgId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR},
+      #{roleDesc,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="roleName != null">
-        role_name,
-      </if>
-      <if test="roleCode != null">
-        role_code,
-      </if>
-      <if test="roleDesc != null">
-        role_desc,
-      </if>
-      <if test="deleteFlag != null">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="orgId != null">
+              org_id,
+          </if>
+          <if test="roleName != null">
+              role_name,
+          </if>
+          <if test="roleCode != null">
+              role_code,
+          </if>
+          <if test="roleDesc != null">
+              role_desc,
+          </if>
+          <if test="deleteFlag != null">
         delete_flag,
       </if>
       <if test="creatTime != null">
@@ -142,17 +146,20 @@
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleDesc != null">
-        #{roleDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null">
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="orgId != null">
+              #{orgId,jdbcType=INTEGER},
+          </if>
+          <if test="roleName != null">
+              #{roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="roleCode != null">
+              #{roleCode,jdbcType=VARCHAR},
+          </if>
+          <if test="roleDesc != null">
+              #{roleDesc,jdbcType=VARCHAR},
+          </if>
+          <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=VARCHAR},
       </if>
       <if test="creatTime != null">
@@ -173,19 +180,22 @@
   <update id="updateByExampleSelective" parameterType="map">
     <!--@mbg.generated-->
     update role
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.roleName != null">
-        role_name = #{record.roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roleCode != null">
-        role_code = #{record.roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.roleDesc != null">
-        role_desc = #{record.roleDesc,jdbcType=VARCHAR},
-      </if>
+      <set>
+          <if test="record.id != null">
+              id = #{record.id,jdbcType=INTEGER},
+          </if>
+          <if test="record.orgId != null">
+              org_id = #{record.orgId,jdbcType=INTEGER},
+          </if>
+          <if test="record.roleName != null">
+              role_name = #{record.roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="record.roleCode != null">
+              role_code = #{record.roleCode,jdbcType=VARCHAR},
+          </if>
+          <if test="record.roleDesc != null">
+              role_desc = #{record.roleDesc,jdbcType=VARCHAR},
+          </if>
       <if test="record.deleteFlag != null">
         delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
       </if>
@@ -202,32 +212,36 @@
   </update>
   <update id="updateByExample" parameterType="map">
     <!--@mbg.generated-->
-    update role
-    set id = #{record.id,jdbcType=INTEGER},
+      update role
+      set id = #{record.id,jdbcType=INTEGER},
+      org_id = #{record.orgId,jdbcType=INTEGER},
       role_name = #{record.roleName,jdbcType=VARCHAR},
       role_code = #{record.roleCode,jdbcType=VARCHAR},
       role_desc = #{record.roleDesc,jdbcType=VARCHAR},
       delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
       creat_time = #{record.creatTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+      <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO">
     <!--@mbg.generated-->
     update role
-    <set>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        role_code = #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleDesc != null">
-        role_desc = #{roleDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null">
+      <set>
+          <if test="orgId != null">
+              org_id = #{orgId,jdbcType=INTEGER},
+          </if>
+          <if test="roleName != null">
+              role_name = #{roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="roleCode != null">
+              role_code = #{roleCode,jdbcType=VARCHAR},
+          </if>
+          <if test="roleDesc != null">
+              role_desc = #{roleDesc,jdbcType=VARCHAR},
+          </if>
+          <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
       </if>
       <if test="creatTime != null">
@@ -241,29 +255,35 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO">
     <!--@mbg.generated-->
-    update role
-    set role_name = #{roleName,jdbcType=VARCHAR},
+      update role
+      set org_id = #{orgId,jdbcType=INTEGER},
+      role_name = #{roleName,jdbcType=VARCHAR},
       role_code = #{roleCode,jdbcType=VARCHAR},
       role_desc = #{roleDesc,jdbcType=VARCHAR},
       delete_flag = #{deleteFlag,jdbcType=VARCHAR},
       creat_time = #{creatTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
+      where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
     update role
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="role_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=INTEGER} then #{item.roleName,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="role_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=INTEGER} then #{item.roleCode,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
+      <trim prefix="set" suffixOverrides=",">
+          <trim prefix="org_id = case" suffix="end,">
+              <foreach collection="list" index="index" item="item">
+                  when id = #{item.id,jdbcType=INTEGER} then #{item.orgId,jdbcType=INTEGER}
+              </foreach>
+          </trim>
+          <trim prefix="role_name = case" suffix="end,">
+              <foreach collection="list" index="index" item="item">
+                  when id = #{item.id,jdbcType=INTEGER} then #{item.roleName,jdbcType=VARCHAR}
+              </foreach>
+          </trim>
+          <trim prefix="role_code = case" suffix="end,">
+              <foreach collection="list" index="index" item="item">
+                  when id = #{item.id,jdbcType=INTEGER} then #{item.roleCode,jdbcType=VARCHAR}
+              </foreach>
+          </trim>
       <trim prefix="role_desc = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           when id = #{item.id,jdbcType=INTEGER} then #{item.roleDesc,jdbcType=VARCHAR}
@@ -292,14 +312,14 @@
   </update>
   <insert id="batchInsert" keyColumn="id" keyProperty="id" parameterType="map" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into role
-    (role_name, role_code, role_desc, delete_flag, creat_time, update_time)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.roleName,jdbcType=VARCHAR}, #{item.roleCode,jdbcType=VARCHAR}, #{item.roleDesc,jdbcType=VARCHAR}, 
-        #{item.deleteFlag,jdbcType=VARCHAR}, #{item.creatTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}
-        )
-    </foreach>
+      insert into role
+      (org_id, role_name, role_code, role_desc, delete_flag, creat_time, update_time)
+      values
+      <foreach collection="list" item="item" separator=",">
+          (#{item.orgId,jdbcType=INTEGER}, #{item.roleName,jdbcType=VARCHAR}, #{item.roleCode,jdbcType=VARCHAR},
+          #{item.roleDesc,jdbcType=VARCHAR}, #{item.deleteFlag,jdbcType=VARCHAR}, #{item.creatTime,jdbcType=TIMESTAMP},
+          #{item.updateTime,jdbcType=TIMESTAMP})
+      </foreach>
   </insert>
   <insert id="insertOrUpdate" keyColumn="id" keyProperty="id" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -308,7 +328,8 @@
       <if test="id != null">
         id,
       </if>
-      role_name,
+        org_id,
+        role_name,
       role_code,
       role_desc,
       delete_flag,
@@ -320,7 +341,8 @@
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      #{roleName,jdbcType=VARCHAR},
+        #{orgId,jdbcType=INTEGER},
+        #{roleName,jdbcType=VARCHAR},
       #{roleCode,jdbcType=VARCHAR},
       #{roleDesc,jdbcType=VARCHAR},
       #{deleteFlag,jdbcType=VARCHAR},
@@ -332,30 +354,34 @@
       <if test="id != null">
         id = #{id,jdbcType=INTEGER},
       </if>
-      role_name = #{roleName,jdbcType=VARCHAR},
-      role_code = #{roleCode,jdbcType=VARCHAR},
-      role_desc = #{roleDesc,jdbcType=VARCHAR},
-      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
-      creat_time = #{creatTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+        org_id = #{orgId,jdbcType=INTEGER},
+        role_name = #{roleName,jdbcType=VARCHAR},
+        role_code = #{roleCode,jdbcType=VARCHAR},
+        role_desc = #{roleDesc,jdbcType=VARCHAR},
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
     </trim>
   </insert>
   <insert id="insertOrUpdateSelective" keyColumn="id" keyProperty="id" parameterType="com.fastdevelopinjava.service.ucenter.model.RoleDO" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into role
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="roleName != null">
-        role_name,
-      </if>
-      <if test="roleCode != null">
-        role_code,
-      </if>
-      <if test="roleDesc != null">
-        role_desc,
-      </if>
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+              id,
+          </if>
+          <if test="orgId != null">
+              org_id,
+          </if>
+          <if test="roleName != null">
+              role_name,
+          </if>
+          <if test="roleCode != null">
+              role_code,
+          </if>
+          <if test="roleDesc != null">
+              role_desc,
+          </if>
       <if test="deleteFlag != null">
         delete_flag,
       </if>
@@ -367,20 +393,23 @@
       </if>
     </trim>
     values
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleDesc != null">
-        #{roleDesc,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+              #{id,jdbcType=INTEGER},
+          </if>
+          <if test="orgId != null">
+              #{orgId,jdbcType=INTEGER},
+          </if>
+          <if test="roleName != null">
+              #{roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="roleCode != null">
+              #{roleCode,jdbcType=VARCHAR},
+          </if>
+          <if test="roleDesc != null">
+              #{roleDesc,jdbcType=VARCHAR},
+          </if>
+          <if test="deleteFlag != null">
         #{deleteFlag,jdbcType=VARCHAR},
       </if>
       <if test="creatTime != null">
@@ -390,20 +419,23 @@
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
-    on duplicate key update 
-    <trim suffixOverrides=",">
-      <if test="id != null">
-        id = #{id,jdbcType=INTEGER},
-      </if>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
-      </if>
-      <if test="roleCode != null">
-        role_code = #{roleCode,jdbcType=VARCHAR},
-      </if>
-      <if test="roleDesc != null">
-        role_desc = #{roleDesc,jdbcType=VARCHAR},
-      </if>
+    on duplicate key update
+      <trim suffixOverrides=",">
+          <if test="id != null">
+              id = #{id,jdbcType=INTEGER},
+          </if>
+          <if test="orgId != null">
+              org_id = #{orgId,jdbcType=INTEGER},
+          </if>
+          <if test="roleName != null">
+              role_name = #{roleName,jdbcType=VARCHAR},
+          </if>
+          <if test="roleCode != null">
+              role_code = #{roleCode,jdbcType=VARCHAR},
+          </if>
+          <if test="roleDesc != null">
+              role_desc = #{roleDesc,jdbcType=VARCHAR},
+          </if>
       <if test="deleteFlag != null">
         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
       </if>

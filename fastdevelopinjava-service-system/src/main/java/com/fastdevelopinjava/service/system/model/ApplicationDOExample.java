@@ -515,6 +515,266 @@ public class ApplicationDOExample {
             return (Criteria) this;
         }
 
+        public Criteria andAppHttpsIsNull() {
+            addCriterion("app_https is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsIsNotNull() {
+            addCriterion("app_https is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsEqualTo(Integer value) {
+            addCriterion("app_https =", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsNotEqualTo(Integer value) {
+            addCriterion("app_https <>", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsGreaterThan(Integer value) {
+            addCriterion("app_https >", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsGreaterThanOrEqualTo(Integer value) {
+            addCriterion("app_https >=", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsLessThan(Integer value) {
+            addCriterion("app_https <", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsLessThanOrEqualTo(Integer value) {
+            addCriterion("app_https <=", value, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsIn(List<Integer> values) {
+            addCriterion("app_https in", values, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsNotIn(List<Integer> values) {
+            addCriterion("app_https not in", values, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsBetween(Integer value1, Integer value2) {
+            addCriterion("app_https between", value1, value2, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHttpsNotBetween(Integer value1, Integer value2) {
+            addCriterion("app_https not between", value1, value2, "appHttps");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostIsNull() {
+            addCriterion("app_host is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostIsNotNull() {
+            addCriterion("app_host is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostEqualTo(String value) {
+            addCriterion("app_host =", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostNotEqualTo(String value) {
+            addCriterion("app_host <>", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostGreaterThan(String value) {
+            addCriterion("app_host >", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostGreaterThanOrEqualTo(String value) {
+            addCriterion("app_host >=", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostLessThan(String value) {
+            addCriterion("app_host <", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostLessThanOrEqualTo(String value) {
+            addCriterion("app_host <=", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostLike(String value) {
+            addCriterion("app_host like", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostNotLike(String value) {
+            addCriterion("app_host not like", value, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostIn(List<String> values) {
+            addCriterion("app_host in", values, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostNotIn(List<String> values) {
+            addCriterion("app_host not in", values, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostBetween(String value1, String value2) {
+            addCriterion("app_host between", value1, value2, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppHostNotBetween(String value1, String value2) {
+            addCriterion("app_host not between", value1, value2, "appHost");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextIsNull() {
+            addCriterion("app_context is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextIsNotNull() {
+            addCriterion("app_context is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextEqualTo(String value) {
+            addCriterion("app_context =", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextNotEqualTo(String value) {
+            addCriterion("app_context <>", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextGreaterThan(String value) {
+            addCriterion("app_context >", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextGreaterThanOrEqualTo(String value) {
+            addCriterion("app_context >=", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextLessThan(String value) {
+            addCriterion("app_context <", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextLessThanOrEqualTo(String value) {
+            addCriterion("app_context <=", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextLike(String value) {
+            addCriterion("app_context like", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextNotLike(String value) {
+            addCriterion("app_context not like", value, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextIn(List<String> values) {
+            addCriterion("app_context in", values, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextNotIn(List<String> values) {
+            addCriterion("app_context not in", values, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextBetween(String value1, String value2) {
+            addCriterion("app_context between", value1, value2, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppContextNotBetween(String value1, String value2) {
+            addCriterion("app_context not between", value1, value2, "appContext");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortIsNull() {
+            addCriterion("app_port is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortIsNotNull() {
+            addCriterion("app_port is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortEqualTo(Integer value) {
+            addCriterion("app_port =", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortNotEqualTo(Integer value) {
+            addCriterion("app_port <>", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortGreaterThan(Integer value) {
+            addCriterion("app_port >", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortGreaterThanOrEqualTo(Integer value) {
+            addCriterion("app_port >=", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortLessThan(Integer value) {
+            addCriterion("app_port <", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortLessThanOrEqualTo(Integer value) {
+            addCriterion("app_port <=", value, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortIn(List<Integer> values) {
+            addCriterion("app_port in", values, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortNotIn(List<Integer> values) {
+            addCriterion("app_port not in", values, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortBetween(Integer value1, Integer value2) {
+            addCriterion("app_port between", value1, value2, "appPort");
+            return (Criteria) this;
+        }
+
+        public Criteria andAppPortNotBetween(Integer value1, Integer value2) {
+            addCriterion("app_port not between", value1, value2, "appPort");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatTimeIsNull() {
             addCriterion("creat_time is null");
             return (Criteria) this;

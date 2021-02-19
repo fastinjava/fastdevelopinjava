@@ -2,6 +2,7 @@ package com.fastdevelopinjava.service.ucenter.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.OrganizationDTO;
@@ -19,6 +20,7 @@ import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -111,9 +113,17 @@ public class OrgServiceImpl
 
     @Override
     public Boolean update(OrganizationUpdateDTO organizationUpdateDTO) {
+        Assert.isTrue(ObjectUtil.isNotEmpty(organizationUpdateDTO) && ObjectUtil.isNotEmpty(organizationUpdateDTO.getOrgId()), () -> "更新时缺失orgId");
         log.info("organizationUpdateDTO =========> {} ", organizationUpdateDTO);
         OrganizationDO organizationDO = orgConvert.organizationUpdateDTO2OrganizationDO(organizationUpdateDTO);
         log.info("organizationDO =========> {} ", organizationDO);
+        //如果是软删除，子类如果有任意一个不是被删除状态则不允许当前父组织被软删除
+        if (StrUtil.isNotBlank(organizationDO.getDeleteFlag()) && "1".equalsIgnoreCase(organizationDO.getDeleteFlag())) {
+            Integer pCount = orgMapper.countByOrgPidAndDeleteFlag(organizationDO.getOrgId(), "0");
+            if (ObjectUtil.isNotEmpty(pCount) && pCount > 0) {
+                throw new RuntimeException("当前父分类下有子分类，不允许删除");
+            }
+        }
         return orgMapper.updateByPrimaryKeySelective(organizationDO) > 0;
     }
 

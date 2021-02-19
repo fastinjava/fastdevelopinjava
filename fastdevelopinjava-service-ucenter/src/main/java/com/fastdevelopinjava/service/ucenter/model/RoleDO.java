@@ -1,33 +1,36 @@
 package com.fastdevelopinjava.service.ucenter.model;
 
-import javax.swing.*;
-import java.io.Serializable;
 import java.util.Date;
 
-public class RoleDO implements Serializable {
+public class RoleDO {
     /**
-    * 角色id
-    */
+     * 角色id
+     */
     private Integer id;
 
     /**
-    * 角色名称
-    */
+     * 所属组织id
+     */
+    private Integer orgId;
+
+    /**
+     * 角色名称
+     */
     private String roleName;
 
     /**
-    * 角色编码
-    */
+     * 角色编码
+     */
     private String roleCode;
 
     /**
-    * 角色描述
-    */
+     * 角色描述
+     */
     private String roleDesc;
 
     /**
-    * 是否删除
-    */
+     * 是否删除
+     */
     private String deleteFlag;
 
     private Date creatTime;
@@ -38,12 +41,13 @@ public class RoleDO implements Serializable {
     public RoleDO() {
     }
 
-    public RoleDO(Integer id, String roleName, String roleCode, String roleDesc , String deleteFlag) {
+    public RoleDO(Integer id, String roleName, String roleCode, String roleDesc, String deleteFlag) {
         this.id = id;
         this.roleName = roleName;
         this.roleCode = roleCode;
         this.roleDesc = roleDesc;
         this.deleteFlag = deleteFlag;
+
     }
 
     public Integer getId() {
@@ -52,6 +56,14 @@ public class RoleDO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(Integer orgId) {
+        this.orgId = orgId;
     }
 
     public String getRoleName() {

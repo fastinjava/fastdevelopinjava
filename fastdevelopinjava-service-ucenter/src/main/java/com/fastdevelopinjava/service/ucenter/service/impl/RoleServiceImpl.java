@@ -1,6 +1,7 @@
 package com.fastdevelopinjava.service.ucenter.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
@@ -30,6 +31,12 @@ public class RoleServiceImpl implements RoleService {
     @Resource
     RoleDOMapper roleMapper;
 
+    /**
+     * todo 需要改造
+     *
+     * @param roleReqDTO
+     * @return
+     */
     private RoleDOExample buildRoleExample(RoleReqDTO roleReqDTO) {
         RoleDOExample roleDOExample = new RoleDOExample();
         RoleDOExample.Criteria criteria = roleDOExample.createCriteria();
@@ -40,17 +47,15 @@ public class RoleServiceImpl implements RoleService {
         if (StringUtils.isNotEmpty(roleReqDTO.getRoleCode())) {
             criteria.andRoleCodeEqualTo(roleReqDTO.getRoleCode());
         }
+        if (ObjectUtil.isNotEmpty(roleReqDTO.getOrgId())) {
+            criteria.andOrgIdEqualTo(roleReqDTO.getOrgId());
+        }
         return roleDOExample;
     }
 
     @Override
     public PageDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
-        PageHelper.startPage(
-                roleReqDTO.getPageNum(),
-                roleReqDTO.getPageable() ? roleReqDTO.getPageSize() : 0,
-                true,
-                true,
-                !roleReqDTO.getPageable());
+        PageHelper.startPage(roleReqDTO.getPageNum(), roleReqDTO.getPageable() ? roleReqDTO.getPageSize() : 0, true, true, !roleReqDTO.getPageable());
         PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(roleReqDTO)));
         long total = pageInfo.getTotal();
         List<RoleDTO> roleDTOList = Lists.newArrayList();

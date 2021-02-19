@@ -3,6 +3,7 @@ package com.fastdevelopinjava.service.system.client.impl;
 import com.fastdevelopinjava.framework.system.api.client.ApplicationClient;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDeleteDTO;
+import com.fastdevelopinjava.framework.system.api.dto.ApplicationInsertDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
 import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
 
 @Api(value = "应用管理", tags = {"应用管理api"})
@@ -28,23 +30,49 @@ public class ApplicationClientImpl implements ApplicationClient {
     @Resource
     private ApplicationService applicationService;
 
-    @PostMapping("/getOne")
+    @PostMapping(value = "/getOne", name = "获取应用详情")
     @Override
     public ResultDTO<ApplicationDTO> getOne(@RequestBody ApplicationReqDTO applicationReqDTO) {
-        return success(applicationService.getOne(applicationReqDTO));
+        try {
+            return success(applicationService.getOne(applicationReqDTO));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failure(e.getMessage());
+        }
     }
 
 
-    @PostMapping("/getList")
+    @PostMapping(value = "/getList", name = "获取应用列表")
     @Override
     public ResultDTO<PageDTO<ApplicationDTO>> getList(@RequestBody ApplicationReqDTO applicationReqDTO) {
-        return success(applicationService.getList(applicationReqDTO));
+        try {
+            return success(applicationService.getList(applicationReqDTO));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failure(e.getMessage());
+        }
     }
 
 
-    @PostMapping("/delete")
+    @PostMapping(value = "/delete", name = "删除应用")
     @Override
-    public ResultDTO<Boolean> delete(ApplicationDeleteDTO applicationDeleteDTO) {
-        return success(applicationService.delete(applicationDeleteDTO));
+    public ResultDTO<Boolean> delete(@RequestBody ApplicationDeleteDTO applicationDeleteDTO) {
+        try {
+            return success(applicationService.delete(applicationDeleteDTO));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failure(e.getMessage());
+        }
+    }
+
+    @PostMapping(value = "/insert", name = "新增应用")
+    @Override
+    public ResultDTO<Boolean> insert(@RequestBody ApplicationInsertDTO applicationInsertDTO) {
+        try {
+            return success(applicationService.insert(applicationInsertDTO));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return failure(e.getMessage());
+        }
     }
 }

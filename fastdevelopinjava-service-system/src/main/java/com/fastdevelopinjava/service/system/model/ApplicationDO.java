@@ -33,6 +33,26 @@ public class ApplicationDO {
      */
     private String deleteFlag;
 
+    /**
+     * 是否支持https，0不支持1支持，默认为0不支持
+     */
+    private Integer appHttps;
+
+    /**
+     * ip或者主机名
+     */
+    private String appHost;
+
+    /**
+     * 资源前缀
+     */
+    private String appContext;
+
+    /**
+     * 端口号
+     */
+    private Integer appPort;
+
     private Date creatTime;
 
     private Date updateTime;
@@ -83,6 +103,38 @@ public class ApplicationDO {
 
     public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public Integer getAppHttps() {
+        return appHttps;
+    }
+
+    public void setAppHttps(Integer appHttps) {
+        this.appHttps = appHttps;
+    }
+
+    public String getAppHost() {
+        return appHost;
+    }
+
+    public void setAppHost(String appHost) {
+        this.appHost = appHost;
+    }
+
+    public String getAppContext() {
+        return appContext;
+    }
+
+    public void setAppContext(String appContext) {
+        this.appContext = appContext;
+    }
+
+    public Integer getAppPort() {
+        return appPort;
+    }
+
+    public void setAppPort(Integer appPort) {
+        this.appPort = appPort;
     }
 
     public Date getCreatTime() {

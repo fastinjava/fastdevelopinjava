@@ -20,6 +20,7 @@ public class RoleReqDTO
      * 角色id
      */
     private Integer id;
+    private Integer orgId;
 
     /**
      * 角色名称

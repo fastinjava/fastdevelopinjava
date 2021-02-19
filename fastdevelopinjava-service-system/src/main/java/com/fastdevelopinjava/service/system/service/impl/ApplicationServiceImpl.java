@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationDeleteDTO;
+import com.fastdevelopinjava.framework.system.api.dto.ApplicationInsertDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApplicationReqDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.service.system.convert.ApplicationConvert;
@@ -77,5 +78,13 @@ public class ApplicationServiceImpl implements ApplicationService {
         applicationDOExample.setOrderByClause("app_id asc limit 1");
         ApplicationDO applicationDO = applicationMapper.selectByExample(applicationDOExample).stream().findFirst().orElseGet(null);
         return applicationConvert.applicationDO2ApplicationDTO(applicationDO);
+    }
+
+    @Override
+    public Boolean insert(ApplicationInsertDTO applicationInsertDTO) {
+        ApplicationDO applicationDO = applicationConvert.applicationInsertDTO2ApplicationDO(applicationInsertDTO);
+        applicationDO.setDeleteFlag("0");
+        int i = applicationMapper.insertSelective(applicationDO);
+        return i > 0;
     }
 }

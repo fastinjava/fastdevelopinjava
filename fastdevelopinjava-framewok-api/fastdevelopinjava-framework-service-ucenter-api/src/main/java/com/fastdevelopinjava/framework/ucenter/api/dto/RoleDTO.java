@@ -12,7 +12,8 @@ public class RoleDTO
      * 角色id
      */
     private Integer id;
-
+    private Integer orgId;
+    private String orgName;
     /**
      * 角色名称
      */

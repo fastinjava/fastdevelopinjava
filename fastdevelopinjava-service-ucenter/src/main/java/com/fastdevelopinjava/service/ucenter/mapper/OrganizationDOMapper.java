@@ -40,4 +40,15 @@ public interface OrganizationDOMapper {
     int batchInsert(@Param("list") List<OrganizationDO> list);
 
     List<NodeDTO> listTree(OrganizationReqDTO organizationReqDTO);
+
+
+    List<OrganizationDO> selectByOrgPid(@Param("orgPid") Integer orgPid);
+
+
+    Integer countByOrgPid(@Param("orgPid") Integer orgPid);
+
+
+    Integer countByOrgPidAndDeleteFlag(@Param("orgPid") Integer orgPid, @Param("deleteFlag") String deleteFlag);
+
+
 }
