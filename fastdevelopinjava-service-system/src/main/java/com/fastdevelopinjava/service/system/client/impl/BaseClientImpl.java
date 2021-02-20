@@ -30,8 +30,6 @@ public class BaseClientImpl {
         //得到controller或者restcontroller的class
         Set<Class<?>> clazzList = ClassScanner.scan("com.fastdevelopinjava", RestController.class, Controller.class);
         for (Class<?> aClass : clazzList) {
-            String name = aClass.getName();
-            log.info("controller class name = {} ", name);
             RequestMapping requestMapping = aClass.getAnnotation(RequestMapping.class);
             String[] baseUrls = requestMapping.value();
             //获取所有方法
@@ -49,6 +47,7 @@ public class BaseClientImpl {
         PostMapping postApi = declaredMethod.getAnnotation(PostMapping.class);
         GetMapping getApi = declaredMethod.getAnnotation(GetMapping.class);
         RequestMapping commonApi = declaredMethod.getAnnotation(RequestMapping.class);
+
         String apiName = "";
         String[] urls = {};
         if (ObjectUtil.isNotEmpty(postApi)) {
@@ -65,7 +64,7 @@ public class BaseClientImpl {
         ApiInfoDTO apiInfoDTO = new ApiInfoDTO();
 
         if (ArrayUtil.isNotEmpty(baseUrls)) {
-            StringBuilder urlSb = new StringBuilder(baseUrls[0]);
+            StringBuffer urlSb = new StringBuffer(baseUrls[0]);
             if (ArrayUtil.isNotEmpty(urls)) {
                 urlSb.append(urls[0]);
                 apiInfoDTO.setApiUrl(urlSb.toString());
