@@ -4,7 +4,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO;
-import com.fastdevelopinjava.framework.ucenter.utils.response.spring.ClassScanner;
+import com.fastdevelopinjava.framework.ucenter.utils.spring.ClassScanner;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

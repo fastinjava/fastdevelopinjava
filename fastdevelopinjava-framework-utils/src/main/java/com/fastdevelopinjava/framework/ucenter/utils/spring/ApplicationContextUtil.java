@@ -1,4 +1,4 @@
-package com.fastdevelopinjava.framework.ucenter.utils.response.spring;
+package com.fastdevelopinjava.framework.ucenter.utils.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

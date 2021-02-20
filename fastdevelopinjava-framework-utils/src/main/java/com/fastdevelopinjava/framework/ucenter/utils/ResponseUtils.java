@@ -1,4 +1,4 @@
-package com.fastdevelopinjava.framework.ucenter.utils.response;
+package com.fastdevelopinjava.framework.ucenter.utils;
 
 
 import cn.hutool.core.lang.Console;
