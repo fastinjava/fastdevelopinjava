@@ -1,6 +1,5 @@
 package com.fastdevelopinjava.service.system.convert.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoInsertDTO;
 import com.fastdevelopinjava.service.system.convert.ApiInfoConvert;
@@ -10,6 +9,7 @@ import com.fastdevelopinjava.service.system.model.ApplicationDO;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 @Component
 public class ApiInfoConvertImpl implements ApiInfoConvert {
@@ -27,12 +27,7 @@ public class ApiInfoConvertImpl implements ApiInfoConvert {
     public ApiInfoDTO apiInfoDO2ApiInfoDTO(ApiInfoDO apiInfoDO) {
         if (null == apiInfoDO) return null;
         ApiInfoDTO apiInfoDTO = new ApiInfoDTO(apiInfoDO.getApiId(), apiInfoDO.getApiCode(), apiInfoDO.getApiName(), apiInfoDO.getApiDesc(), apiInfoDO.getAppId(), apiInfoDO.getNeedAuth(), apiInfoDO.getDeleteFlag(), apiInfoDO.getCreatTime(), apiInfoDO.getUpdateTime(), apiInfoDO.getApiUrl(), apiInfoDO.getApiName());
-        if (ObjectUtil.isNotEmpty(apiInfoDO.getAppId())) {
-            ApplicationDO applicationDO = applicationDOMapper.selectByPrimaryKey(apiInfoDO.getAppId());
-            if (ObjectUtil.isNotEmpty(applicationDO)) {
-                apiInfoDTO.setAppName(applicationDO.getAppName());
-            }
-        }
+        apiInfoDTO.setAppName(Optional.of(apiInfoDO).map(ApiInfoDO::getAppId).map(appId -> applicationDOMapper.selectByPrimaryKey(appId)).map(ApplicationDO::getAppName).orElse(null));
         return apiInfoDTO;
     }
 }
