@@ -53,4 +53,23 @@ public class ApiInfoDTO implements Serializable {
      */
     private String apiUrl;
 
+    private String appName;
+
+
+    public ApiInfoDTO() {
+    }
+
+    public ApiInfoDTO(Integer apiId, String apiCode, String apiName, String apiDesc, Integer appId, String needAuth, String deleteFlag, Date creatTime, Date updateTime, String apiUrl, String appName) {
+        this.apiId = apiId;
+        this.apiCode = apiCode;
+        this.apiName = apiName;
+        this.apiDesc = apiDesc;
+        this.appId = appId;
+        this.needAuth = needAuth;
+        this.deleteFlag = deleteFlag;
+        this.creatTime = creatTime;
+        this.updateTime = updateTime;
+        this.apiUrl = apiUrl;
+        this.appName = appName;
+    }
 }

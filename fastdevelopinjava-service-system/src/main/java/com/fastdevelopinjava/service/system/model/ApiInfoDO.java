@@ -47,6 +47,23 @@ public class ApiInfoDO {
      */
     private String apiUrl;
 
+
+    public ApiInfoDO() {
+    }
+
+    public ApiInfoDO(Integer apiId, String apiCode, String apiName, String apiDesc, Integer appId, String needAuth, String deleteFlag, Date creatTime, Date updateTime, String apiUrl) {
+        this.apiId = apiId;
+        this.apiCode = apiCode;
+        this.apiName = apiName;
+        this.apiDesc = apiDesc;
+        this.appId = appId;
+        this.needAuth = needAuth;
+        this.deleteFlag = deleteFlag;
+        this.creatTime = creatTime;
+        this.updateTime = updateTime;
+        this.apiUrl = apiUrl;
+    }
+
     public Integer getApiId() {
         return apiId;
     }
