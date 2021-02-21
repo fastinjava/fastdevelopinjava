@@ -2,6 +2,7 @@ package com.fastdevelopinjava.service.system.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoDeleteDTO;
 import com.fastdevelopinjava.framework.system.api.dto.ApiInfoInsertDTO;
@@ -34,44 +35,43 @@ public class ApiInfoServiceImpl implements ApiInfoService {
 
 
     private ApiInfoDOExample build(
-            Integer apiId
+            //apiId
+            JSONObject jsonObject
     ) {
-
         ApiInfoDOExample apiInfoDOExample = new ApiInfoDOExample();
         ApiInfoDOExample.Criteria criteria = apiInfoDOExample.createCriteria();
 
+        Integer apiId = jsonObject.getInteger("apiId");
 
         if (ObjectUtil.isNotEmpty(apiId)) {
             criteria.andApiIdEqualTo(apiId);
         }
-
         return apiInfoDOExample;
-
     }
-
-    ;
 
     @Override
     public PageDTO<ApiInfoDTO> getList(ApiInfoReqDTO apiInfoReqDTO) {
         PageHelper.startPage(apiInfoReqDTO.getPageNum(), apiInfoReqDTO.getPageable() ? apiInfoReqDTO.getPageSize() : 0, true, true, !apiInfoReqDTO.getPageable());
-        List<ApiInfoDO> apiInfoDOList = apiInfoMapper.selectByExample(build(apiInfoReqDTO.getApiId()));
+        List<ApiInfoDO> apiInfoDOList = apiInfoMapper.selectByExample(build(new JSONObject().fluentPut("apiId",apiInfoReqDTO.getApiId())));
         PageInfo<ApiInfoDO> pageInfo = new PageInfo<>(apiInfoDOList);
         List<ApiInfoDTO> apiInfoDTOS = Lists.newArrayList();
         if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
             apiInfoDTOS = pageInfo.getList().stream().map(apiInfoDO -> apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoDO)).collect(Collectors.toList());
         }
-        PageDTO<ApiInfoDTO> pageDTO = new PageDTO<>(pageInfo.getTotal(), apiInfoDTOS);
-        return pageDTO;
+        return new PageDTO<>(pageInfo.getTotal(), apiInfoDTOS);
     }
 
     @Override
     public ApiInfoDTO getOne(ApiInfoReqDTO apiInfoReqDTO) {
-        return null;
+        ApiInfoDO apiInfoDO = apiInfoMapper.selectByExample(this.build(new JSONObject().fluentPut("apiId",apiInfoReqDTO.getApiId()))).stream().findFirst().orElse(null);
+        ApiInfoDTO apiInfoDTO = apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoDO);
+        return apiInfoDTO;
     }
 
     @Override
     public Boolean delete(ApiInfoDeleteDTO apiInfoDeleteDTO) {
-        return null;
+        int i = apiInfoMapper.deleteByExample(this.build(new JSONObject().fluentPut("apiId",apiInfoDeleteDTO.getApiId())));
+        return i > 0;
     }
 
     @Override
