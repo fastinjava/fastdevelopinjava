@@ -52,8 +52,7 @@ public class ApiInfoServiceImpl implements ApiInfoService {
     @Override
     public PageDTO<ApiInfoDTO> getList(ApiInfoReqDTO apiInfoReqDTO) {
         PageHelper.startPage(apiInfoReqDTO.getPageNum(), apiInfoReqDTO.getPageable() ? apiInfoReqDTO.getPageSize() : 0, true, true, !apiInfoReqDTO.getPageable());
-        List<ApiInfoDO> apiInfoDOList = apiInfoMapper.selectByExample(build(new JSONObject().fluentPut("apiId",apiInfoReqDTO.getApiId())));
-        PageInfo<ApiInfoDO> pageInfo = new PageInfo<>(apiInfoDOList);
+        PageInfo<ApiInfoDO> pageInfo = new PageInfo<>(apiInfoMapper.selectByExample(build(new JSONObject().fluentPut("apiId", apiInfoReqDTO.getApiId()))));
         List<ApiInfoDTO> apiInfoDTOS = Lists.newArrayList();
         if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
             apiInfoDTOS = pageInfo.getList().stream().map(apiInfoDO -> apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoDO)).collect(Collectors.toList());
@@ -63,14 +62,14 @@ public class ApiInfoServiceImpl implements ApiInfoService {
 
     @Override
     public ApiInfoDTO getOne(ApiInfoReqDTO apiInfoReqDTO) {
-        ApiInfoDO apiInfoDO = apiInfoMapper.selectByExample(this.build(new JSONObject().fluentPut("apiId",apiInfoReqDTO.getApiId()))).stream().findFirst().orElse(null);
+        ApiInfoDO apiInfoDO = apiInfoMapper.selectByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoReqDTO.getApiId()))).stream().findFirst().orElse(null);
         ApiInfoDTO apiInfoDTO = apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoDO);
         return apiInfoDTO;
     }
 
     @Override
     public Boolean delete(ApiInfoDeleteDTO apiInfoDeleteDTO) {
-        int i = apiInfoMapper.deleteByExample(this.build(new JSONObject().fluentPut("apiId",apiInfoDeleteDTO.getApiId())));
+        int i = apiInfoMapper.deleteByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoDeleteDTO.getApiId())));
         return i > 0;
     }
 

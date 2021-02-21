@@ -18,7 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
-import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.*;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
 
 @Api(value = "应用接口管理", tags = {"应用接口管理api"})
 @Slf4j
@@ -29,8 +30,8 @@ public class ApiInfoClientImpl implements ApiInfoClient {
     @Resource
     private ApiInfoService apiInfoService;
 
-    @PostMapping("/getList")
     @Override
+    @PostMapping("/getList")
     public ResultDTO<PageDTO<ApiInfoDTO>> getList(@RequestBody ApiInfoReqDTO apiInfoReqDTO) {
         try {
             PageDTO<ApiInfoDTO> pageDTO = apiInfoService.getList(apiInfoReqDTO);
@@ -66,8 +67,8 @@ public class ApiInfoClientImpl implements ApiInfoClient {
         }
     }
 
-    @PostMapping("/insert")
     @Override
+    @PostMapping("/insert")
     public ResultDTO<Boolean> insert(@RequestBody ApiInfoInsertDTO apiInfoInsertDTO) {
         try {
             return success(apiInfoService.insert(apiInfoInsertDTO));
