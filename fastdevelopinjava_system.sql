@@ -32,9 +32,11 @@ CREATE TABLE `api_info` (
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `api_url` varchar(100) DEFAULT NULL COMMENT 'url',
   PRIMARY KEY (`api_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `api_info` */
+
+insert  into `api_info`(`api_id`,`api_code`,`api_name`,`api_desc`,`app_id`,`need_auth`,`delete_flag`,`creat_time`,`update_time`,`api_url`) values (6,'apiCode','apiName','apiDesc',1,'0','0','2021-02-21 22:42:13','2021-02-21 22:42:13','apiUrl'),(7,'2','2','2',1,'0',NULL,'2021-02-21 22:53:55','2021-02-21 22:53:55','33');
 
 /*Table structure for table `application` */
 
