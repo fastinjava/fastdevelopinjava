@@ -2,6 +2,7 @@ package com.fastdevelopinjava.service.ucenter.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.RoleReqDTO;
@@ -34,21 +35,25 @@ public class RoleServiceImpl implements RoleService {
     /**
      * todo 需要改造
      *
-     * @param roleReqDTO
      * @return
      */
-    private RoleDOExample buildRoleExample(RoleReqDTO roleReqDTO) {
+    private RoleDOExample buildRoleExample(JSONObject jsonObject) {
         RoleDOExample roleDOExample = new RoleDOExample();
         RoleDOExample.Criteria criteria = roleDOExample.createCriteria();
+
+        Integer id = jsonObject.getInteger("id");
+        String roleCode = jsonObject.getString("roleCode");
+        Integer orgId = jsonObject.getInteger("orgId");
+
         //条件
-        if (roleReqDTO.getId() != null) {
-            criteria.andIdEqualTo(roleReqDTO.getId());
+        if (id != null) {
+            criteria.andIdEqualTo(id);
         }
-        if (StringUtils.isNotEmpty(roleReqDTO.getRoleCode())) {
-            criteria.andRoleCodeEqualTo(roleReqDTO.getRoleCode());
+        if (StringUtils.isNotEmpty(roleCode)) {
+            criteria.andRoleCodeEqualTo(roleCode);
         }
-        if (ObjectUtil.isNotEmpty(roleReqDTO.getOrgId())) {
-            criteria.andOrgIdEqualTo(roleReqDTO.getOrgId());
+        if (ObjectUtil.isNotEmpty(orgId)) {
+            criteria.andOrgIdEqualTo(orgId);
         }
         return roleDOExample;
     }
@@ -56,7 +61,9 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public PageDTO<RoleDTO> getList(RoleReqDTO roleReqDTO) {
         PageHelper.startPage(roleReqDTO.getPageNum(), roleReqDTO.getPageable() ? roleReqDTO.getPageSize() : 0, true, true, !roleReqDTO.getPageable());
-        PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(roleReqDTO)));
+        PageInfo<RoleDO> pageInfo = new PageInfo<>(roleMapper.selectByExample(this.buildRoleExample(
+                new JSONObject().fluentPut("id", roleReqDTO.getId()).fluentPut("roleCode", roleReqDTO.getRoleCode()).fluentPut("orgId", roleReqDTO.getOrgId())
+        )));
         long total = pageInfo.getTotal();
         List<RoleDTO> roleDTOList = Lists.newArrayList();
         if (CollectionUtil.isNotEmpty(pageInfo.getList())) {
@@ -67,7 +74,9 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDTO getOne(RoleReqDTO roleReqDTO) {
-        RoleDOExample roleDOExample = this.buildRoleExample(roleReqDTO);
+        RoleDOExample roleDOExample = this.buildRoleExample(
+                new JSONObject().fluentPut("id", roleReqDTO.getId())
+        );
         roleDOExample.setOrderByClause("id  limit 1");
         RoleDO roleDO = roleMapper.selectByExample(roleDOExample).stream().findFirst().orElseGet(null);
         return null != roleDO ? roleConvert.roleDO2RoleDTO(roleDO) : null;

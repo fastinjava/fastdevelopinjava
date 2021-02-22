@@ -62,20 +62,16 @@ public class ApiInfoServiceImpl implements ApiInfoService {
 
     @Override
     public ApiInfoDTO getOne(ApiInfoReqDTO apiInfoReqDTO) {
-        ApiInfoDO apiInfoDO = apiInfoMapper.selectByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoReqDTO.getApiId()))).stream().findFirst().orElse(null);
-        ApiInfoDTO apiInfoDTO = apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoDO);
-        return apiInfoDTO;
+        return apiInfoConvert.apiInfoDO2ApiInfoDTO(apiInfoMapper.selectByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoReqDTO.getApiId()))).stream().findFirst().orElse(null));
     }
 
     @Override
     public Boolean delete(ApiInfoDeleteDTO apiInfoDeleteDTO) {
-        int i = apiInfoMapper.deleteByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoDeleteDTO.getApiId())));
-        return i > 0;
+        return apiInfoMapper.deleteByExample(this.build(new JSONObject().fluentPut("apiId", apiInfoDeleteDTO.getApiId()))) > 0;
     }
 
     @Override
     public Boolean insert(ApiInfoInsertDTO apiInfoInsertDTO) {
-        int i = apiInfoMapper.insertSelective(apiInfoConvert.apiInfoInsertDTO2ApiInfoDO(apiInfoInsertDTO));
-        return i > 0;
+        return apiInfoMapper.insertSelective(apiInfoConvert.apiInfoInsertDTO2ApiInfoDO(apiInfoInsertDTO)) > 0;
     }
 }
