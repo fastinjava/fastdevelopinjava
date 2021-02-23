@@ -64,7 +64,7 @@ public class BaseClientImpl {
         ApiInfoDTO apiInfoDTO = new ApiInfoDTO();
 
         if (ArrayUtil.isNotEmpty(baseUrls)) {
-            StringBuffer urlSb = new StringBuffer(baseUrls[0]);
+            StringBuilder urlSb = new StringBuilder(baseUrls[0]);
             if (ArrayUtil.isNotEmpty(urls)) {
                 urlSb.append(urls[0]);
                 apiInfoDTO.setApiUrl(urlSb.toString());
