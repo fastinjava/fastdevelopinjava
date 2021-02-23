@@ -38,9 +38,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public Boolean insert(MenuInsertDTO menuInsertDTO) {
-        MenuDO menuDO = menuConvert.menuInsertDTO2MenuDO(menuInsertDTO);
-        int i = menuDOMapper.insertSelective(menuDO);
-        return i > 0;
+        return menuDOMapper.insertSelective(menuConvert.menuInsertDTO2MenuDO(menuInsertDTO)) > 0;
     }
 
     @Override
