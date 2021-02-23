@@ -14,4 +14,9 @@ spring:
         file-extension: yaml
         namespace: fastdevelopinjava-biz
         group: DEFAULT_GROUP
-
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+      uri-encoding: UTF-8

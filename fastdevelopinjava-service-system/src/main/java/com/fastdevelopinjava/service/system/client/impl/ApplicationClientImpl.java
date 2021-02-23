@@ -30,8 +30,8 @@ public class ApplicationClientImpl implements ApplicationClient {
     @Resource
     private ApplicationService applicationService;
 
-    @PostMapping(value = "/getOne", name = "获取应用详情")
     @Override
+    @PostMapping(value = "/getOne", name = "获取应用详情")
     public ResultDTO<ApplicationDTO> getOne(@RequestBody ApplicationReqDTO applicationReqDTO) {
         try {
             return success(applicationService.getOne(applicationReqDTO));
