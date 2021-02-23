@@ -32,11 +32,6 @@ public class RoleServiceImpl implements RoleService {
     @Resource
     RoleDOMapper roleMapper;
 
-    /**
-     * todo 需要改造
-     *
-     * @return
-     */
     private RoleDOExample buildRoleExample(JSONObject jsonObject) {
         RoleDOExample roleDOExample = new RoleDOExample();
         RoleDOExample.Criteria criteria = roleDOExample.createCriteria();

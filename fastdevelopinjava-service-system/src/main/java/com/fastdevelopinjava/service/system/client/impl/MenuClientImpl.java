@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.failure;
+import static com.fastdevelopinjava.framework.ucenter.common.res.ResultDTO.success;
+
 @Api(value = "菜单接口管理", tags = {"菜单接口管理api"})
 @Slf4j
 @RestController
@@ -26,10 +29,28 @@ public class MenuClientImpl implements MenuClient {
     private MenuService menuService;
 
     @Override
+    public ResultDTO<MenuDTO> getOne(MenuReqDTO menuReqDTO) {
+        try {
+            MenuDTO menuDTO = menuService.getOne(menuReqDTO);
+            return success(menuDTO);
+        } catch (Exception e) {
+            String errorMessage = ThrowableUtil.getStackTrace(e);
+            log.error("com.fastdevelopinjava.service.system.client.impl.MenuClientImpl.getOne errorMessage  =  {} ", errorMessage);
+            return failure(errorMessage);
+        }
+    }
+
+    @Override
     @PostMapping("/insert")
     public ResultDTO<Boolean> insert(@RequestBody MenuInsertDTO menuInsertDTO) {
-        Boolean result = menuService.insert(menuInsertDTO);
-        return null;
+        try {
+            Boolean result = menuService.insert(menuInsertDTO);
+            return success(result);
+        } catch (Exception e) {
+            String errorMessage = ThrowableUtil.getStackTrace(e);
+            log.error("com.fastdevelopinjava.service.system.client.impl.MenuClientImpl.insert errorMessage  =  {} ", errorMessage);
+            return failure(errorMessage);
+        }
     }
 
     @Override
