@@ -9,9 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class MenuReqDTO implements Serializable {
 
     //默认分页，第一页

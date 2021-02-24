@@ -29,7 +29,8 @@ public class MenuClientImpl implements MenuClient {
     private MenuService menuService;
 
     @Override
-    public ResultDTO<MenuDTO> getOne(MenuReqDTO menuReqDTO) {
+    @PostMapping("/getOne")
+    public ResultDTO<MenuDTO> getOne(@RequestBody MenuReqDTO menuReqDTO) {
         try {
             MenuDTO menuDTO = menuService.getOne(menuReqDTO);
             return success(menuDTO);
