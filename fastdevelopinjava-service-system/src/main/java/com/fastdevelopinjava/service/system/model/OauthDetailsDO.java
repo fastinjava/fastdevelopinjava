@@ -2,7 +2,13 @@ package com.fastdevelopinjava.service.system.model;
 
 import java.util.Date;
 
+/**
+ * 客户端名称
+ */
 public class OauthDetailsDO {
+
+    private String clientName;
+
     private String clientId;
 
     private String resourceIds;
@@ -47,6 +53,14 @@ public class OauthDetailsDO {
      * 更新时间
      */
     private Date updateTime;
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 
     public String getClientId() {
         return clientId;

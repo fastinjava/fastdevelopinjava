@@ -29,7 +29,7 @@ public class MenuClientImpl implements MenuClient {
     private MenuService menuService;
 
     @Override
-    @PostMapping("/getOne")
+    @PostMapping(value = "/getOne",name = "获取菜单详情")
     public ResultDTO<MenuDTO> getOne(@RequestBody MenuReqDTO menuReqDTO) {
         try {
             MenuDTO menuDTO = menuService.getOne(menuReqDTO);
@@ -42,7 +42,7 @@ public class MenuClientImpl implements MenuClient {
     }
 
     @Override
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert",name = "新增菜单")
     public ResultDTO<Boolean> insert(@RequestBody MenuInsertDTO menuInsertDTO) {
         try {
             Boolean result = menuService.insert(menuInsertDTO);
@@ -55,7 +55,7 @@ public class MenuClientImpl implements MenuClient {
     }
 
     @Override
-    @PostMapping("/getList")
+    @PostMapping(value = "/getList",name = "获取菜单列表")
     public ResultDTO<PageDTO<MenuDTO>> getList(@RequestBody MenuReqDTO menuReqDTO) {
         try {
             PageDTO<MenuDTO> pageDTO = menuService.getList(menuReqDTO);

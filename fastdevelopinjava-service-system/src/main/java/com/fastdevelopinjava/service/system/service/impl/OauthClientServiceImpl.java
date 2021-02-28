@@ -3,6 +3,7 @@ package com.fastdevelopinjava.service.system.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailReqDTO;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsDTO;
+import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsInsertDTO;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsUpdateDTO;
 import com.fastdevelopinjava.framework.ucenter.common.res.PageDTO;
 import com.fastdevelopinjava.service.system.convert.OauthClientConvert;
@@ -35,6 +36,7 @@ public class OauthClientServiceImpl implements OauthClientService {
 
         String clientId = jsonObject.getString("clientId");
         String clientSecret = jsonObject.getString("clientSecret");
+        String deleteFlag = jsonObject.getString("deleteFlag");
 
         if (StringUtils.isNotEmpty(clientId)) {
             criteria.andClientIdEqualTo(clientId);
@@ -44,8 +46,21 @@ public class OauthClientServiceImpl implements OauthClientService {
             criteria.andClientSecretEqualTo(clientSecret);
         }
 
+        if (StringUtils.isNotEmpty(deleteFlag))
+        {
+            criteria.andDeleteFlagEqualTo(deleteFlag);
+        }
+
         return oauthDetailsDOExample;
 
+    }
+
+    @Override
+    public Boolean insert(OauthDetailsInsertDTO oauthDetailsInsertDTO) {
+        OauthDetailsDO oauthDetailsDO = oauthClientConvert.oauthDetailsInsertDTO2OauthDetailsDO(oauthDetailsInsertDTO);
+        oauthDetailsDO.setDeleteFlag("0");
+        int i = oauthDetailsDOMapper.insertSelective(oauthDetailsDO);
+        return i > 0;
     }
 
     @Override
@@ -59,7 +74,9 @@ public class OauthClientServiceImpl implements OauthClientService {
     public PageDTO<OauthDetailsDTO> getList(OauthDetailReqDTO oauthDetailReqDTO) {
         PageHelper.startPage(oauthDetailReqDTO.getPageNum(), oauthDetailReqDTO.getPageable() ? oauthDetailReqDTO.getPageSize() : 0, true, true, !oauthDetailReqDTO.getPageable());
         PageInfo<OauthDetailsDO> pageInfo = new PageInfo<>(oauthDetailsDOMapper.selectByExample(build(
-                new JSONObject().fluentPut("clientId", oauthDetailReqDTO.getClientId())
+                new JSONObject()
+                        .fluentPut("clientId", oauthDetailReqDTO.getClientId())
+                        .fluentPut("deleteFlag","0")//未删除的记录
         )));
         List<OauthDetailsDTO> oauthDetailsDTOList = pageInfo.getList().stream().map(oauthDetailsDO -> oauthClientConvert.oauthDetailsDO2OauthDetailsDTO(oauthDetailsDO)).collect(Collectors.toList());
         return new PageDTO<>(pageInfo.getTotal(), oauthDetailsDTOList);

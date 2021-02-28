@@ -3,6 +3,7 @@ package com.fastdevelopinjava.service.system.convert.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsDTO;
+import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsInsertDTO;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsUpdateDTO;
 import com.fastdevelopinjava.service.system.convert.OauthClientConvert;
 import com.fastdevelopinjava.service.system.model.OauthDetailsDO;
@@ -11,6 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class OauthClientConvertImpl implements OauthClientConvert {
 
+
+    @Override
+    public OauthDetailsDO oauthDetailsInsertDTO2OauthDetailsDO(OauthDetailsInsertDTO oauthDetailsInsertDTO) {
+        OauthDetailsDO oauthDetailsDO = new OauthDetailsDO();
+        BeanUtil.copyProperties(oauthDetailsInsertDTO, oauthDetailsDO);
+        return oauthDetailsDO;
+    }
 
     @Override
     public OauthDetailsDO oauthDetailsUpdateDTO2OauthDetailsDO(OauthDetailsUpdateDTO oauthDetailsUpdateDTO) {
