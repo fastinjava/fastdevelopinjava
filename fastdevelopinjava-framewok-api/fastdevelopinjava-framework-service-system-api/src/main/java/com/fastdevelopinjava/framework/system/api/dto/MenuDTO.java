@@ -10,10 +10,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Accessors(fluent = true)
 public class MenuDTO implements Serializable {
     private Integer menuId;
     private String menuName;
@@ -21,6 +17,7 @@ public class MenuDTO implements Serializable {
     private String menuUrl;
     private String menuIcon;
     private Integer menuPid;
+    private String menuPname;
     /**
      * 菜单类型,0->目录 1->页面路由 2->按钮
      */
