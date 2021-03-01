@@ -61,7 +61,12 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public PageDTO<UserDTO> getList(UserReqDTO userReqDTO) {
-        PageHelper.startPage(userReqDTO.getPageNum(), userReqDTO.getPageSize(), true, true, !userReqDTO.getPageable());
+        PageHelper.startPage(userReqDTO.getPageNum(),
+                userReqDTO.getPageable() ? userReqDTO.getPageSize() : 0,
+                true,
+                true,
+                !userReqDTO.getPageable()
+        );
         PageInfo<UserDO> pageInfo = new PageInfo<>(userMapper.selectByExample(buildUserDOExample(userReqDTO)));
         List<UserDO> userDOList = pageInfo.getList();
         long total = pageInfo.getTotal();

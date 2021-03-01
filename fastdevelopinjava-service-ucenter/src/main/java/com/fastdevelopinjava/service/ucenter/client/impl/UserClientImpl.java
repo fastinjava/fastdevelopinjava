@@ -27,8 +27,8 @@ public class UserClientImpl implements UserClient {
     private UserService userService;
 
     @ApiOperation("用户详情")
-    @PostMapping("/getOne")
     @Override
+    @PostMapping("/getOne")
     public ResultDTO<UserDTO> selectOne(@RequestBody UserReqDTO userReqDTO) {
         ResultDTO<UserDTO> result = new ResultDTO<>();
         try {
@@ -45,8 +45,8 @@ public class UserClientImpl implements UserClient {
     }
 
     @ApiOperation("用户列表")
-    @PostMapping("/selectList")
     @Override
+    @PostMapping("/selectList")
     public ResultDTO<PageDTO<UserDTO>> selectList(@RequestBody UserReqDTO userReqDTO) {
         ResultDTO<PageDTO<UserDTO>> result = new ResultDTO<>();
         try {
@@ -61,8 +61,8 @@ public class UserClientImpl implements UserClient {
         return result;
     }
     @ApiOperation("用户新增")
-    @PostMapping("/insert")
     @Override
+    @PostMapping("/insert")
     public ResultDTO<Boolean> insert(@RequestBody UserCreateDTO userCreateDTO) {
         ResultDTO<Boolean> resultDTO = new ResultDTO<>();
         try {
@@ -77,8 +77,8 @@ public class UserClientImpl implements UserClient {
     }
 
     @ApiOperation("用户更新")
-    @PostMapping("/update")
     @Override
+    @PostMapping("/update")
     public ResultDTO<Boolean> update(@RequestBody UserUpdateDTO userUpdateDTO) {
         ResultDTO<Boolean> resultDTO = new ResultDTO<>();
         try {
