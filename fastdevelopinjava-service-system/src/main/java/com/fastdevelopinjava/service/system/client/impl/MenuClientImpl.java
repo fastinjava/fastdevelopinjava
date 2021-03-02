@@ -58,8 +58,7 @@ public class MenuClientImpl implements MenuClient {
     @PostMapping(value = "/getList",name = "获取菜单列表")
     public ResultDTO<PageDTO<MenuDTO>> getList(@RequestBody MenuReqDTO menuReqDTO) {
         try {
-            PageDTO<MenuDTO> pageDTO = menuService.getList(menuReqDTO);
-            return ResultDTO.success(pageDTO);
+            return ResultDTO.success(menuService.getList(menuReqDTO));
         } catch (Exception e) {
             String errorMessage = ThrowableUtil.getStackTrace(e);
             log.error("com.fastdevelopinjava.service.system.client.impl.MenuClientImpl.getList errorMessage  =  {} ", errorMessage);

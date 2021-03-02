@@ -19,6 +19,8 @@
         <result column="delete_flag" jdbcType="VARCHAR" property="deleteFlag"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="client_name" jdbcType="VARCHAR" property="clientName"/>
+        <result column="clientName" jdbcType="VARCHAR" property="clientname"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <!--@mbg.generated-->
@@ -86,7 +88,7 @@
         <!--@mbg.generated-->
         client_id, resource_ids, client_secret, `scope`, authorized_grant_types, web_server_redirect_uri,
         authorities, access_token_validity, refresh_token_validity, additional_information,
-        autoapprove, `status`, delete_flag, create_time, update_time
+        autoapprove, `status`, delete_flag, create_time, update_time, client_name, clientName
     </sql>
     <select id="selectByExample" parameterType="com.fastdevelopinjava.service.system.model.OauthDetailsDOExample"
             resultMap="BaseResultMap">
@@ -117,15 +119,15 @@
         `scope`, authorized_grant_types, web_server_redirect_uri,
         authorities, access_token_validity, refresh_token_validity,
         additional_information, autoapprove, `status`,
-        delete_flag, create_time, update_time
-        )
+        delete_flag, create_time, update_time,
+        client_name, clientName)
         values (#{clientId,jdbcType=VARCHAR}, #{resourceIds,jdbcType=VARCHAR}, #{clientSecret,jdbcType=VARCHAR},
         #{scope,jdbcType=VARCHAR}, #{authorizedGrantTypes,jdbcType=VARCHAR}, #{webServerRedirectUri,jdbcType=VARCHAR},
         #{authorities,jdbcType=VARCHAR}, #{accessTokenValidity,jdbcType=INTEGER},
         #{refreshTokenValidity,jdbcType=INTEGER},
         #{additionalInformation,jdbcType=VARCHAR}, #{autoapprove,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
-        #{deleteFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-        )
+        #{deleteFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{clientName,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.fastdevelopinjava.service.system.model.OauthDetailsDO">
         <!--@mbg.generated-->
@@ -176,6 +178,12 @@
             <if test="updateTime != null">
                 update_time,
             </if>
+            <if test="clientName != null">
+                client_name,
+            </if>
+            <if test="clientname != null">
+                clientName,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="clientId != null">
@@ -222,6 +230,12 @@
             </if>
             <if test="updateTime != null">
                 #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clientName != null">
+                #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="clientname != null">
+                #{clientname,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -282,6 +296,12 @@
             <if test="record.updateTime != null">
                 update_time = #{record.updateTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="record.clientName != null">
+                client_name = #{record.clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.clientname != null">
+                clientName = #{record.clientname,jdbcType=VARCHAR},
+            </if>
         </set>
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
@@ -304,7 +324,9 @@
         `status` = #{record.status,jdbcType=VARCHAR},
         delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+        client_name = #{record.clientName,jdbcType=VARCHAR},
+        clientName = #{record.clientname,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -314,7 +336,8 @@
         insert into oauth_client_details
         (client_id, resource_ids, client_secret, `scope`, authorized_grant_types, web_server_redirect_uri,
         authorities, access_token_validity, refresh_token_validity, additional_information,
-        autoapprove, `status`, delete_flag, create_time, update_time)
+        autoapprove, `status`, delete_flag, create_time, update_time, client_name, clientName
+        )
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.clientId,jdbcType=VARCHAR}, #{item.resourceIds,jdbcType=VARCHAR},
@@ -324,7 +347,9 @@
             #{item.accessTokenValidity,jdbcType=INTEGER}, #{item.refreshTokenValidity,jdbcType=INTEGER},
             #{item.additionalInformation,jdbcType=VARCHAR}, #{item.autoapprove,jdbcType=VARCHAR},
             #{item.status,jdbcType=VARCHAR}, #{item.deleteFlag,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.updateTime,jdbcType=TIMESTAMP}, #{item.clientName,jdbcType=VARCHAR},
+            #{item.clientname,jdbcType=VARCHAR}
+            )
         </foreach>
     </insert>
     <insert id="insertOrUpdate" parameterType="com.fastdevelopinjava.service.system.model.OauthDetailsDO">
@@ -332,15 +357,16 @@
         insert into oauth_client_details
         (client_id, resource_ids, client_secret, `scope`, authorized_grant_types, web_server_redirect_uri,
         authorities, access_token_validity, refresh_token_validity, additional_information,
-        autoapprove, `status`, delete_flag, create_time, update_time)
+        autoapprove, `status`, delete_flag, create_time, update_time, client_name, clientName
+        )
         values
         (#{clientId,jdbcType=VARCHAR}, #{resourceIds,jdbcType=VARCHAR}, #{clientSecret,jdbcType=VARCHAR},
         #{scope,jdbcType=VARCHAR}, #{authorizedGrantTypes,jdbcType=VARCHAR}, #{webServerRedirectUri,jdbcType=VARCHAR},
         #{authorities,jdbcType=VARCHAR}, #{accessTokenValidity,jdbcType=INTEGER},
         #{refreshTokenValidity,jdbcType=INTEGER},
         #{additionalInformation,jdbcType=VARCHAR}, #{autoapprove,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
-        #{deleteFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-        )
+        #{deleteFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+        #{clientName,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR})
         on duplicate key update
         client_id = #{clientId,jdbcType=VARCHAR},
         resource_ids = #{resourceIds,jdbcType=VARCHAR},
@@ -356,7 +382,9 @@
         `status` = #{status,jdbcType=VARCHAR},
         delete_flag = #{deleteFlag,jdbcType=VARCHAR},
         create_time = #{createTime,jdbcType=TIMESTAMP},
-        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        client_name = #{clientName,jdbcType=VARCHAR},
+        clientName = #{clientname,jdbcType=VARCHAR}
     </insert>
     <insert id="insertOrUpdateSelective" parameterType="com.fastdevelopinjava.service.system.model.OauthDetailsDO">
         <!--@mbg.generated-->
@@ -407,6 +435,12 @@
             <if test="updateTime != null">
                 update_time,
             </if>
+            <if test="clientName != null">
+                client_name,
+            </if>
+            <if test="clientname != null">
+                clientName,
+            </if>
         </trim>
         values
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -455,6 +489,12 @@
             <if test="updateTime != null">
                 #{updateTime,jdbcType=TIMESTAMP},
             </if>
+            <if test="clientName != null">
+                #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="clientname != null">
+                #{clientname,jdbcType=VARCHAR},
+            </if>
         </trim>
         on duplicate key update
         <trim suffixOverrides=",">
@@ -502,6 +542,12 @@
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="clientName != null">
+                client_name = #{clientName,jdbcType=VARCHAR},
+            </if>
+            <if test="clientname != null">
+                clientName = #{clientname,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

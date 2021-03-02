@@ -9,7 +9,7 @@
         <result column="menu_code" jdbcType="VARCHAR" property="menuCode"/>
         <result column="menu_url" jdbcType="VARCHAR" property="menuUrl"/>
         <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon"/>
-        <result column="menu_pid" jdbcType="INTEGER" property="menuPid"/>
+        <result column="menu_pid" jdbcType="VARCHAR" property="menuPid"/>
         <result column="menu_type" jdbcType="VARCHAR" property="menuType"/>
         <result column="menu_visible" jdbcType="VARCHAR" property="menuVisible"/>
         <result column="menu_api_ids" jdbcType="VARCHAR" property="menuApiIds"/>
@@ -127,7 +127,7 @@
         menu_visible, menu_api_ids, delete_flag,
         create_time, update_time)
         values (#{menuName,jdbcType=VARCHAR}, #{menuCode,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR},
-        #{menuIcon,jdbcType=VARCHAR}, #{menuPid,jdbcType=INTEGER}, #{menuType,jdbcType=VARCHAR},
+        #{menuIcon,jdbcType=VARCHAR}, #{menuPid,jdbcType=VARCHAR}, #{menuType,jdbcType=VARCHAR},
         #{menuVisible,jdbcType=VARCHAR}, #{menuApiIds,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR},
         #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
     </insert>
@@ -184,7 +184,7 @@
                 #{menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="menuPid != null">
-                #{menuPid,jdbcType=INTEGER},
+                #{menuPid,jdbcType=VARCHAR},
             </if>
             <if test="menuType != null">
                 #{menuType,jdbcType=VARCHAR},
@@ -234,7 +234,7 @@
                 menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="record.menuPid != null">
-                menu_pid = #{record.menuPid,jdbcType=INTEGER},
+                menu_pid = #{record.menuPid,jdbcType=VARCHAR},
             </if>
             <if test="record.menuType != null">
                 menu_type = #{record.menuType,jdbcType=VARCHAR},
@@ -267,7 +267,7 @@
         menu_code = #{record.menuCode,jdbcType=VARCHAR},
         menu_url = #{record.menuUrl,jdbcType=VARCHAR},
         menu_icon = #{record.menuIcon,jdbcType=VARCHAR},
-        menu_pid = #{record.menuPid,jdbcType=INTEGER},
+        menu_pid = #{record.menuPid,jdbcType=VARCHAR},
         menu_type = #{record.menuType,jdbcType=VARCHAR},
         menu_visible = #{record.menuVisible,jdbcType=VARCHAR},
         menu_api_ids = #{record.menuApiIds,jdbcType=VARCHAR},
@@ -295,7 +295,7 @@
                 menu_icon = #{menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="menuPid != null">
-                menu_pid = #{menuPid,jdbcType=INTEGER},
+                menu_pid = #{menuPid,jdbcType=VARCHAR},
             </if>
             <if test="menuType != null">
                 menu_type = #{menuType,jdbcType=VARCHAR},
@@ -325,7 +325,7 @@
         menu_code = #{menuCode,jdbcType=VARCHAR},
         menu_url = #{menuUrl,jdbcType=VARCHAR},
         menu_icon = #{menuIcon,jdbcType=VARCHAR},
-        menu_pid = #{menuPid,jdbcType=INTEGER},
+        menu_pid = #{menuPid,jdbcType=VARCHAR},
         menu_type = #{menuType,jdbcType=VARCHAR},
         menu_visible = #{menuVisible,jdbcType=VARCHAR},
         menu_api_ids = #{menuApiIds,jdbcType=VARCHAR},
@@ -360,7 +360,7 @@
             </trim>
             <trim prefix="menu_pid = case" suffix="end,">
                 <foreach collection="list" index="index" item="item">
-                    when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.menuPid,jdbcType=INTEGER}
+                    when menu_id = #{item.menuId,jdbcType=INTEGER} then #{item.menuPid,jdbcType=VARCHAR}
                 </foreach>
             </trim>
             <trim prefix="menu_type = case" suffix="end,">
@@ -407,7 +407,7 @@
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.menuName,jdbcType=VARCHAR}, #{item.menuCode,jdbcType=VARCHAR}, #{item.menuUrl,jdbcType=VARCHAR},
-            #{item.menuIcon,jdbcType=VARCHAR}, #{item.menuPid,jdbcType=INTEGER}, #{item.menuType,jdbcType=VARCHAR},
+            #{item.menuIcon,jdbcType=VARCHAR}, #{item.menuPid,jdbcType=VARCHAR}, #{item.menuType,jdbcType=VARCHAR},
             #{item.menuVisible,jdbcType=VARCHAR}, #{item.menuApiIds,jdbcType=VARCHAR},
             #{item.deleteFlag,jdbcType=VARCHAR},
             #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
@@ -442,7 +442,7 @@
             #{menuCode,jdbcType=VARCHAR},
             #{menuUrl,jdbcType=VARCHAR},
             #{menuIcon,jdbcType=VARCHAR},
-            #{menuPid,jdbcType=INTEGER},
+            #{menuPid,jdbcType=VARCHAR},
             #{menuType,jdbcType=VARCHAR},
             #{menuVisible,jdbcType=VARCHAR},
             #{menuApiIds,jdbcType=VARCHAR},
@@ -459,7 +459,7 @@
             menu_code = #{menuCode,jdbcType=VARCHAR},
             menu_url = #{menuUrl,jdbcType=VARCHAR},
             menu_icon = #{menuIcon,jdbcType=VARCHAR},
-            menu_pid = #{menuPid,jdbcType=INTEGER},
+            menu_pid = #{menuPid,jdbcType=VARCHAR},
             menu_type = #{menuType,jdbcType=VARCHAR},
             menu_visible = #{menuVisible,jdbcType=VARCHAR},
             menu_api_ids = #{menuApiIds,jdbcType=VARCHAR},
@@ -528,7 +528,7 @@
                 #{menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="menuPid != null">
-                #{menuPid,jdbcType=INTEGER},
+                #{menuPid,jdbcType=VARCHAR},
             </if>
             <if test="menuType != null">
                 #{menuType,jdbcType=VARCHAR},
@@ -567,7 +567,7 @@
                 menu_icon = #{menuIcon,jdbcType=VARCHAR},
             </if>
             <if test="menuPid != null">
-                menu_pid = #{menuPid,jdbcType=INTEGER},
+                menu_pid = #{menuPid,jdbcType=VARCHAR},
             </if>
             <if test="menuType != null">
                 menu_type = #{menuType,jdbcType=VARCHAR},

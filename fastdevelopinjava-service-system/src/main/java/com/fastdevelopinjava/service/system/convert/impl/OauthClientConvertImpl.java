@@ -49,6 +49,7 @@ public class OauthClientConvertImpl implements OauthClientConvert {
         oauthDetailsDTO.setDeleteFlag(oauthDetailsDO.getDeleteFlag());
         oauthDetailsDTO.setCreateTime(oauthDetailsDO.getCreateTime());
         oauthDetailsDTO.setUpdateTime(oauthDetailsDO.getUpdateTime());
+        oauthDetailsDTO.setClientname(oauthDetailsDO.getClientname());
 
         return oauthDetailsDTO;
     }

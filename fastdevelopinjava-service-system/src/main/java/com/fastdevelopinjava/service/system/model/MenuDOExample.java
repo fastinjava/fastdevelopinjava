@@ -455,52 +455,62 @@ public class MenuDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidEqualTo(Integer value) {
+        public Criteria andMenuPidEqualTo(String value) {
             addCriterion("menu_pid =", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidNotEqualTo(Integer value) {
+        public Criteria andMenuPidNotEqualTo(String value) {
             addCriterion("menu_pid <>", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidGreaterThan(Integer value) {
+        public Criteria andMenuPidGreaterThan(String value) {
             addCriterion("menu_pid >", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMenuPidGreaterThanOrEqualTo(String value) {
             addCriterion("menu_pid >=", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidLessThan(Integer value) {
+        public Criteria andMenuPidLessThan(String value) {
             addCriterion("menu_pid <", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidLessThanOrEqualTo(Integer value) {
+        public Criteria andMenuPidLessThanOrEqualTo(String value) {
             addCriterion("menu_pid <=", value, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidIn(List<Integer> values) {
+        public Criteria andMenuPidLike(String value) {
+            addCriterion("menu_pid like", value, "menuPid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuPidNotLike(String value) {
+            addCriterion("menu_pid not like", value, "menuPid");
+            return (Criteria) this;
+        }
+
+        public Criteria andMenuPidIn(List<String> values) {
             addCriterion("menu_pid in", values, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidNotIn(List<Integer> values) {
+        public Criteria andMenuPidNotIn(List<String> values) {
             addCriterion("menu_pid not in", values, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidBetween(Integer value1, Integer value2) {
+        public Criteria andMenuPidBetween(String value1, String value2) {
             addCriterion("menu_pid between", value1, value2, "menuPid");
             return (Criteria) this;
         }
 
-        public Criteria andMenuPidNotBetween(Integer value1, Integer value2) {
+        public Criteria andMenuPidNotBetween(String value1, String value2) {
             addCriterion("menu_pid not between", value1, value2, "menuPid");
             return (Criteria) this;
         }

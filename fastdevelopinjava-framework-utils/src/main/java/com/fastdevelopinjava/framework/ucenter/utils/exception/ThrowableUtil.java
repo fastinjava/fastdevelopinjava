@@ -22,7 +22,7 @@ public class ThrowableUtil {
     public static String getStackTrace(Throwable throwable) {
         StringWriter sw = new StringWriter();
         try (PrintWriter pw = new PrintWriter(sw)) {
-            throwable.printStackTrace(pw);
+            //throwable.printStackTrace(pw);
             return sw.toString();
         }
     }

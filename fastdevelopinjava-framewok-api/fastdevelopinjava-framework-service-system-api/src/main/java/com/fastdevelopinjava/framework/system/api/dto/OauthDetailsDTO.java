@@ -50,4 +50,10 @@ public class OauthDetailsDTO implements Serializable {
      * 更新时间
      */
     private Date updateTime;
+
+    /**
+     * 客户端名称
+     */
+    private String clientname;
+
 }

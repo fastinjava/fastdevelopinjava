@@ -1,7 +1,6 @@
 package com.fastdevelopinjava.service.system.convert.impl;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fastdevelopinjava.framework.system.api.dto.MenuDTO;
@@ -10,15 +9,12 @@ import com.fastdevelopinjava.framework.system.api.dto.OauthDetailReqDTO;
 import com.fastdevelopinjava.framework.system.api.dto.OauthDetailsDTO;
 import com.fastdevelopinjava.service.system.convert.MenuConvert;
 import com.fastdevelopinjava.service.system.mapper.MenuDOMapper;
-import com.fastdevelopinjava.service.system.mapper.OauthDetailsDOMapper;
 import com.fastdevelopinjava.service.system.model.MenuDO;
-import com.fastdevelopinjava.service.system.model.OauthDetailsDO;
-import com.fastdevelopinjava.service.system.model.OauthDetailsDOExample;
 import com.fastdevelopinjava.service.system.service.OauthClientService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MenuConvertImpl implements MenuConvert {
@@ -43,31 +39,22 @@ public class MenuConvertImpl implements MenuConvert {
         MenuDTO menuDTO = new MenuDTO();
         BeanUtil.copyProperties(menuDO, menuDTO);
 
-        Integer menuPid = menuDO.getMenuPid();
+        String menuPid = menuDO.getMenuPid();
         String menuType = menuDO.getMenuType();
-        /**
-         * 这里至少两个问题，
-         * 1、oauthClient 需要多加一个列，clientName
-         * 2、menuPid 应该为string类型
-         */
-//        if (ObjectUtil.isNotEmpty(menuPid) && StrUtil.isNotBlank(menuType))
-//        {
-//            //菜单类型为-1时，代表父菜单id为客户端id
-//            if ("-1".equalsIgnoreCase(menuType))
-//            {
-//                OauthDetailReqDTO oauthDetailReqDTO = new OauthDetailReqDTO();
-//                oauthDetailReqDTO.setClientId(String.valueOf(menuPid));
-//                OauthDetailsDTO oauthDetailsDTO = oauthClientService.getOne(oauthDetailReqDTO);
-//                menuDTO.setMenuPname(oauthDetailsDTO);
-//            }
-//        }
-        MenuDO pMenu = menuDOMapper.selectByPrimaryKey(menuPid);
 
-        if (ObjectUtil.isNotEmpty(pMenu)){
-            String pMenuName = pMenu.getMenuName();
-            menuDTO.setMenuPname(pMenuName);
+        if (ObjectUtil.isNotEmpty(menuPid) && StrUtil.isNotBlank(menuType)) {
+            //菜单类型为-1时，代表父菜单id为客户端id
+            if ("-1".equalsIgnoreCase(menuType)) {
+                //根据menuPid获取父菜单名称
+                OauthDetailReqDTO oauthDetailReqDTO = new OauthDetailReqDTO();
+                oauthDetailReqDTO.setClientId(String.valueOf(menuPid));
+                OauthDetailsDTO oauthDetailsDTO = oauthClientService.getOne(oauthDetailReqDTO);
+                menuDTO.setMenuPname(oauthDetailsDTO.getClientname());
+            } else {
+                //菜单类型不为-1，说明父菜单跟客户端没有关系
+                menuDTO.setMenuPname(Optional.ofNullable(menuDOMapper.selectByPrimaryKey(Integer.parseInt(menuPid))).map(MenuDO::getMenuName).orElse(null));
+            }
         }
-
         return menuDTO;
     }
 }

@@ -29,12 +29,16 @@ public class MenuDO {
     private String menuIcon;
 
     /**
-     * 父菜单id
+     * 父菜单id，如果menu_type=-1，代表当前父菜单id为客户端id
      */
-    private Integer menuPid;
+    private String menuPid;
 
     /**
-     * 菜单类型,0->目录 1->页面路由 2->按钮
+     * 菜单类型,
+     * <p>
+     * -1->客户端
+     * <p>
+     * 0->目录 1->页面路由 2->按钮
      */
     private String menuType;
 
@@ -97,11 +101,11 @@ public class MenuDO {
         this.menuIcon = menuIcon;
     }
 
-    public Integer getMenuPid() {
+    public String getMenuPid() {
         return menuPid;
     }
 
-    public void setMenuPid(Integer menuPid) {
+    public void setMenuPid(String menuPid) {
         this.menuPid = menuPid;
     }
 

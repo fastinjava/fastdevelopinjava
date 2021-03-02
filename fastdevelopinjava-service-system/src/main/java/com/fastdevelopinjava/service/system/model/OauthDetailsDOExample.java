@@ -1114,6 +1114,146 @@ public class OauthDetailsDOExample {
             addCriterion("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andClientNameIsNull() {
+            addCriterion("client_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameIsNotNull() {
+            addCriterion("client_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameEqualTo(String value) {
+            addCriterion("client_name =", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotEqualTo(String value) {
+            addCriterion("client_name <>", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameGreaterThan(String value) {
+            addCriterion("client_name >", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameGreaterThanOrEqualTo(String value) {
+            addCriterion("client_name >=", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLessThan(String value) {
+            addCriterion("client_name <", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLessThanOrEqualTo(String value) {
+            addCriterion("client_name <=", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameLike(String value) {
+            addCriterion("client_name like", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotLike(String value) {
+            addCriterion("client_name not like", value, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameIn(List<String> values) {
+            addCriterion("client_name in", values, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotIn(List<String> values) {
+            addCriterion("client_name not in", values, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameBetween(String value1, String value2) {
+            addCriterion("client_name between", value1, value2, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientNameNotBetween(String value1, String value2) {
+            addCriterion("client_name not between", value1, value2, "clientName");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameIsNull() {
+            addCriterion("clientName is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameIsNotNull() {
+            addCriterion("clientName is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameEqualTo(String value) {
+            addCriterion("clientName =", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameNotEqualTo(String value) {
+            addCriterion("clientName <>", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameGreaterThan(String value) {
+            addCriterion("clientName >", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameGreaterThanOrEqualTo(String value) {
+            addCriterion("clientName >=", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameLessThan(String value) {
+            addCriterion("clientName <", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameLessThanOrEqualTo(String value) {
+            addCriterion("clientName <=", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameLike(String value) {
+            addCriterion("clientName like", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameNotLike(String value) {
+            addCriterion("clientName not like", value, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameIn(List<String> values) {
+            addCriterion("clientName in", values, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameNotIn(List<String> values) {
+            addCriterion("clientName not in", values, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameBetween(String value1, String value2) {
+            addCriterion("clientName between", value1, value2, "clientname");
+            return (Criteria) this;
+        }
+
+        public Criteria andClientnameNotBetween(String value1, String value2) {
+            addCriterion("clientName not between", value1, value2, "clientname");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
