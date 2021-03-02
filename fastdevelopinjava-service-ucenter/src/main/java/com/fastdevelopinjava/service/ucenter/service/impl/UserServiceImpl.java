@@ -18,6 +18,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     UserConvert userConvert;
+
+    @Resource
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private UserDOExample buildUserDOExample(UserReqDTO userReqDTO) {
         UserDOExample userDOExample = new UserDOExample();
@@ -80,7 +84,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean insert(UserCreateDTO userCreateDTO) {
         UserDO userDO = userConvert.userCreateDTO2UserDO(userCreateDTO);
-        userDO.setPassword("123456");
+        String password = userDO.getPassword();
+        if (StringUtils.isBlank(password)) {
+            throw new RuntimeException(" password 字段为空");
+        }
         userDO.setCreatedTime(DateUtil.date());
         userDO.setUpdatedTime(DateUtil.date());
         return userMapper.insertSelective(userDO) > 0;
