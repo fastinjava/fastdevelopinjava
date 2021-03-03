@@ -1,5 +1,6 @@
 package com.fastdevelopinjava.service.ucenter;
 
+import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,6 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
+@EnableSwaggerBootstrapUI
 @EnableDiscoveryClient
 @EnableFeignClients
 @SpringBootApplication
