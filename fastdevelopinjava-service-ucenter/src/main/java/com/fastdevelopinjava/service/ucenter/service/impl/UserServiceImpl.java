@@ -87,6 +87,9 @@ public class UserServiceImpl implements UserService {
         String password = userDO.getPassword();
         if (StringUtils.isBlank(password)) {
             throw new RuntimeException(" password 字段为空");
+        }else {
+            String encodedPassword = bCryptPasswordEncoder.encode(password);
+            userDO.setPassword(encodedPassword);
         }
         userDO.setCreatedTime(DateUtil.date());
         userDO.setUpdatedTime(DateUtil.date());
