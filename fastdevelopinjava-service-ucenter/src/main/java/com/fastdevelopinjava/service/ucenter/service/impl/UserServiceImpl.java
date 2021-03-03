@@ -4,6 +4,7 @@ package com.fastdevelopinjava.service.ucenter.service.impl;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
+import com.alibaba.fastjson.JSONObject;
 import com.fastdevelopinjava.framework.ucenter.api.dto.UserCreateDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.UserDTO;
 import com.fastdevelopinjava.framework.ucenter.api.dto.UserReqDTO;
@@ -39,21 +40,25 @@ public class UserServiceImpl implements UserService {
     @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private UserDOExample buildUserDOExample(UserReqDTO userReqDTO) {
+    private UserDOExample buildUserDOExample(JSONObject jsonObject) {
         UserDOExample userDOExample = new UserDOExample();
         UserDOExample.Criteria criteria = userDOExample.createCriteria();
-        if (ObjectUtil.isNotEmpty(userReqDTO.getUserId())) {
-            criteria.andUserIdEqualTo(userReqDTO.getUserId());
+        Integer userId = jsonObject.getInteger("userId");
+        if (ObjectUtil.isNotEmpty(userId)) {
+            criteria.andUserIdEqualTo(userId);
         }
-        if (StringUtils.isNotEmpty(userReqDTO.getUserName())) {
-            criteria.andUserNameLike("%" + userReqDTO.getUserName().trim() + "%");
+        String userName = jsonObject.getString("userName");
+        if (StringUtils.isNotEmpty(userName)) {
+            criteria.andUserNameLike("%" + userName.trim() + "%");
         }
         return userDOExample;
     }
 
     @Override
     public UserDTO getOne(UserReqDTO userReqDTO) {
-        UserDOExample userDOExample = this.buildUserDOExample(userReqDTO);
+        UserDOExample userDOExample = this.buildUserDOExample(
+                new JSONObject().fluentPut("userId", userReqDTO.getUserId()).fluentPut("userName", userReqDTO.getUserName())
+        );
         userDOExample.setOrderByClause("user_id limit 1");
         UserDO userDO = userMapper.selectByExample(userDOExample).stream().findFirst().orElseGet(null);
         return ObjectUtil.isNotEmpty(userDO) ? userConvert.userDO2UserDTO(userDO) : null;
@@ -71,7 +76,9 @@ public class UserServiceImpl implements UserService {
                 true,
                 !userReqDTO.getPageable()
         );
-        PageInfo<UserDO> pageInfo = new PageInfo<>(userMapper.selectByExample(buildUserDOExample(userReqDTO)));
+        PageInfo<UserDO> pageInfo = new PageInfo<>(userMapper.selectByExample(buildUserDOExample(
+                new JSONObject().fluentPut("userId", userReqDTO.getUserId()).fluentPut("userName", userReqDTO.getUserName())
+        )));
         List<UserDO> userDOList = pageInfo.getList();
         long total = pageInfo.getTotal();
         List<UserDTO> userDTOList = Lists.newArrayList();
